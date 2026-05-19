@@ -10,6 +10,7 @@ export default defineConfig({
     coverage: {
       include: [
         "app/components/landing/**/*.tsx",
+        "app/actions/**/*.ts",
         "app/hooks/**/*.ts",
         "app/lib/**/*.ts",
       ],

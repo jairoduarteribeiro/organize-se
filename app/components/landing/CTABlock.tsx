@@ -1,5 +1,6 @@
 "use client";
 
+import { WaitlistForm } from "@/app/components/landing/WaitlistForm";
 import { useCountdown } from "@/app/hooks/useCountdown";
 import { EVENT_UTC, KIWIFY_URL } from "@/app/lib/constants";
 
@@ -12,18 +13,6 @@ const countdownLabels = {
 
 function formatCountdownUnit(value: number) {
   return value.toString().padStart(2, "0");
-}
-
-function WaitlistForm() {
-  return (
-    <div
-      className="rounded-lg border border-emerald-300 bg-emerald-50 p-5 text-center text-base font-bold text-emerald-950"
-      data-testid="waitlist-form-stub"
-    >
-      {/* TODO: Replace with the real WaitlistForm in task_05. */}
-      Lista de espera em breve.
-    </div>
-  );
 }
 
 export function CTABlock() {

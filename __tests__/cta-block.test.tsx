@@ -42,7 +42,7 @@ describe("CTABlock", () => {
     expect(parseFloat(getComputedStyle(link).minHeight)).toBeGreaterThanOrEqual(48);
   });
 
-  it("hides the countdown and renders the WaitlistForm stub after the event", () => {
+  it("hides the countdown and renders the WaitlistForm after the event", () => {
     vi.spyOn(Date, "now").mockReturnValue(
       new Date("2026-06-28T13:00:01.000Z").getTime(),
     );
@@ -51,6 +51,11 @@ describe("CTABlock", () => {
 
     expect(screen.queryByLabelText("Contagem regressiva para o workshop")).toBeNull();
     expect(screen.queryByRole("link", { name: /quero garantir meu ingresso/i })).toBeNull();
-    expect(screen.getByTestId("waitlist-form-stub")).toBeTruthy();
+    expect(
+      screen.getByRole("textbox", {
+        name: /email para lista de espera/i,
+      }),
+    ).toBeTruthy();
+    expect(screen.getByRole("button", { name: /entrar na lista/i })).toBeTruthy();
   });
 });
