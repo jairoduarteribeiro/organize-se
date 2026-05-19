@@ -1,3 +1,4 @@
+import { act } from "react";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { cleanup, render, screen, within } from "@testing-library/react";
 import type { ImgHTMLAttributes } from "react";
@@ -28,9 +29,49 @@ vi.mock("next/image", () => ({
   },
 }));
 
+type ObserverCallback = (
+  entries: IntersectionObserverEntry[],
+  observer: IntersectionObserver,
+) => void;
+
+class MockIntersectionObserver implements IntersectionObserver {
+  static instances: MockIntersectionObserver[] = [];
+
+  readonly root: Element | Document | null = null;
+  readonly rootMargin: string;
+  readonly thresholds: ReadonlyArray<number>;
+  callback: ObserverCallback;
+  disconnect = vi.fn();
+  observe = vi.fn();
+  takeRecords = vi.fn((): IntersectionObserverEntry[] => []);
+  unobserve = vi.fn();
+
+  constructor(callback: ObserverCallback, options: IntersectionObserverInit = {}) {
+    this.callback = callback;
+    this.rootMargin = options.rootMargin ?? "0px";
+    this.thresholds = Array.isArray(options.threshold)
+      ? options.threshold
+      : [options.threshold ?? 0];
+    MockIntersectionObserver.instances.push(this);
+  }
+
+  trigger(isIntersecting: boolean) {
+    this.callback(
+      [
+        {
+          isIntersecting,
+        } as IntersectionObserverEntry,
+      ],
+      this,
+    );
+  }
+}
+
 describe("static landing Server Components", () => {
   afterEach(() => {
     cleanup();
+    Reflect.deleteProperty(window, "IntersectionObserver");
+    MockIntersectionObserver.instances = [];
   });
 
   it("PainQualifier renders exactly 7 pain point list items", () => {
@@ -83,6 +124,47 @@ describe("static landing Server Components", () => {
     });
 
     expect(within(list).getAllByRole("listitem")).toHaveLength(4);
+  });
+
+  it("Deliverables starts with hidden checklist items before in-view fires", () => {
+    window.IntersectionObserver = MockIntersectionObserver;
+
+    render(<Deliverables />);
+
+    const items = screen.getAllByTestId("deliverable-item");
+
+    expect(items).toHaveLength(4);
+    for (const item of items) {
+      expect(item.className).toContain("opacity-0");
+      expect(item.className).toContain("translate-y-4");
+      expect(item.className).not.toContain("is-visible");
+    }
+  });
+
+  it("Deliverables checklist items become visible after IntersectionObserver fires", () => {
+    window.IntersectionObserver = MockIntersectionObserver;
+
+    render(<Deliverables />);
+
+    act(() => {
+      MockIntersectionObserver.instances[1]?.trigger(true);
+    });
+
+    for (const item of screen.getAllByTestId("deliverable-item")) {
+      expect(item.className).toContain("is-visible");
+      expect(item.className).toContain("opacity-100");
+      expect(item.className).toContain("translate-y-0");
+    }
+  });
+
+  it("Deliverables checklist items have distinct stagger delay classes", () => {
+    render(<Deliverables />);
+
+    const delayClasses = screen
+      .getAllByTestId("deliverable-item")
+      .map((item) => Array.from(item.classList).find((className) => /^delay-\d+$/.test(className)));
+
+    expect(delayClasses).toEqual(["delay-100", "delay-200", "delay-300", "delay-400"]);
   });
 
   it("HeroSection renders an image with non-empty alt text and a Kiwify CTA", () => {

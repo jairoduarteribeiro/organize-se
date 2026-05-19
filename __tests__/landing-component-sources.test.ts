@@ -15,9 +15,18 @@ const componentFiles = [
   "FinalCTA.tsx",
 ];
 
+const scrollAnimationClientComponents = [
+  "PainQualifier.tsx",
+  "Testimonials.tsx",
+  "BioSection.tsx",
+  "Deliverables.tsx",
+];
+
 describe("static landing component source constraints", () => {
-  it('keeps landing Server Components free of "use client" directives', () => {
-    for (const file of componentFiles) {
+  it('keeps non-interactive landing Server Components free of "use client" directives', () => {
+    for (const file of componentFiles.filter(
+      (file) => !scrollAnimationClientComponents.includes(file),
+    )) {
       const source = readFileSync(
         join(process.cwd(), "app/components/landing", file),
         "utf8",
@@ -25,6 +34,18 @@ describe("static landing component source constraints", () => {
 
       expect(source).not.toContain('"use client"');
       expect(source).not.toContain("'use client'");
+    }
+  });
+
+  it('marks scroll-animation sections with "use client"', () => {
+    for (const file of scrollAnimationClientComponents) {
+      const source = readFileSync(
+        join(process.cwd(), "app/components/landing", file),
+        "utf8",
+      );
+
+      expect(source.startsWith('"use client";')).toBe(true);
+      expect(source).toContain("useInView");
     }
   });
 

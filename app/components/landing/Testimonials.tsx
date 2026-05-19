@@ -1,4 +1,9 @@
+"use client";
+
 import Image from "next/image";
+import { useRef } from "react";
+
+import { useInView } from "@/app/hooks/useInView";
 
 const testimonials = [
   {
@@ -28,13 +33,23 @@ const testimonials = [
 ];
 
 export function Testimonials() {
+  const headingRef = useRef<HTMLDivElement>(null);
+  const headingInView = useInView(headingRef);
+
   return (
     <section
       aria-labelledby="testimonials-title"
       className="w-full overflow-x-clip bg-zinc-950 px-5 py-16 text-white sm:px-8 lg:px-12"
     >
       <div className="mx-auto w-full max-w-6xl">
-        <div className="max-w-2xl">
+        <div
+          className={`max-w-2xl transition-all duration-500 ${
+            headingInView
+              ? "is-visible opacity-100 translate-y-0"
+              : "opacity-0 translate-y-4"
+          }`}
+          ref={headingRef}
+        >
           <p className="text-sm font-black uppercase tracking-[0.18em] text-emerald-300">
             Depoimentos
           </p>

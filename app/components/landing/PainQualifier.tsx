@@ -1,3 +1,8 @@
+"use client";
+
+import { useRef } from "react";
+
+import { useInView } from "@/app/hooks/useInView";
 import { KIWIFY_URL } from "@/app/lib/constants";
 
 const painPoints = [
@@ -11,13 +16,23 @@ const painPoints = [
 ];
 
 export function PainQualifier() {
+  const headingRef = useRef<HTMLDivElement>(null);
+  const headingInView = useInView(headingRef);
+
   return (
     <section
       aria-labelledby="pain-qualifier-title"
       className="w-full overflow-x-clip bg-white px-5 py-16 text-zinc-950 sm:px-8 lg:px-12"
     >
       <div className="mx-auto flex w-full max-w-5xl flex-col gap-10">
-        <div className="max-w-3xl">
+        <div
+          className={`max-w-3xl transition-all duration-500 ${
+            headingInView
+              ? "is-visible opacity-100 translate-y-0"
+              : "opacity-0 translate-y-4"
+          }`}
+          ref={headingRef}
+        >
           <p className="text-sm font-black uppercase tracking-[0.18em] text-emerald-700">
             Para quem é este workshop
           </p>

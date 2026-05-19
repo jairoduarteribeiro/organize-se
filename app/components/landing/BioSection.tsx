@@ -1,8 +1,15 @@
-import Image from "next/image";
+"use client";
 
+import Image from "next/image";
+import { useRef } from "react";
+
+import { useInView } from "@/app/hooks/useInView";
 import { INSTAGRAM_URL } from "@/app/lib/constants";
 
 export function BioSection() {
+  const headingRef = useRef<HTMLDivElement>(null);
+  const headingInView = useInView(headingRef);
+
   return (
     <section
       aria-labelledby="bio-title"
@@ -21,15 +28,24 @@ export function BioSection() {
         </div>
 
         <div className="min-w-0">
-          <p className="text-sm font-black uppercase tracking-[0.18em] text-emerald-700">
-            Quem vai te guiar nesta jornada
-          </p>
-          <h2 id="bio-title" className="mt-3 text-3xl font-black leading-tight sm:text-5xl">
-            Rafaela Ribeiro
-          </h2>
-          <p className="mt-3 text-lg font-bold text-zinc-800">
-            Educadora Financeira, Mentora e Empresária
-          </p>
+          <div
+            className={`transition-all duration-500 ${
+              headingInView
+                ? "is-visible opacity-100 translate-y-0"
+                : "opacity-0 translate-y-4"
+            }`}
+            ref={headingRef}
+          >
+            <p className="text-sm font-black uppercase tracking-[0.18em] text-emerald-700">
+              Quem vai te guiar nesta jornada
+            </p>
+            <h2 id="bio-title" className="mt-3 text-3xl font-black leading-tight sm:text-5xl">
+              Rafaela Ribeiro
+            </h2>
+            <p className="mt-3 text-lg font-bold text-zinc-800">
+              Educadora Financeira, Mentora e Empresária
+            </p>
+          </div>
           <div className="mt-6 space-y-5 text-lg leading-8 text-zinc-700">
             <p>
               Nordestina de Fortaleza e morando em Portugal há mais de 4 anos,

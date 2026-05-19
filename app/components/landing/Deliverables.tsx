@@ -1,3 +1,9 @@
+"use client";
+
+import { useRef } from "react";
+
+import { useInView } from "@/app/hooks/useInView";
+
 const deliverables = [
   {
     title: "Aulas práticas",
@@ -25,6 +31,11 @@ const logistics = [
 ];
 
 export function Deliverables() {
+  const headingRef = useRef<HTMLDivElement>(null);
+  const checklistRef = useRef<HTMLUListElement>(null);
+  const headingInView = useInView(headingRef);
+  const checklistInView = useInView(checklistRef);
+
   return (
     <section
       aria-labelledby="deliverables-title"
@@ -32,15 +43,24 @@ export function Deliverables() {
     >
       <div className="mx-auto grid w-full max-w-6xl gap-10 lg:grid-cols-[0.8fr_1.2fr]">
         <div>
-          <p className="text-sm font-black uppercase tracking-[0.18em] text-emerald-300">
-            O que você vai encontrar
-          </p>
-          <h2
-            id="deliverables-title"
-            className="mt-3 text-3xl font-black leading-tight sm:text-5xl"
+          <div
+            className={`transition-all duration-500 ${
+              headingInView
+                ? "is-visible opacity-100 translate-y-0"
+                : "opacity-0 translate-y-4"
+            }`}
+            ref={headingRef}
           >
-            Um encontro prático para organizar os próximos 30 dias.
-          </h2>
+            <p className="text-sm font-black uppercase tracking-[0.18em] text-emerald-300">
+              O que você vai encontrar
+            </p>
+            <h2
+              id="deliverables-title"
+              className="mt-3 text-3xl font-black leading-tight sm:text-5xl"
+            >
+              Um encontro prático para organizar os próximos 30 dias.
+            </h2>
+          </div>
 
           <dl className="mt-8 grid gap-4">
             {logistics.map((item) => (
@@ -56,10 +76,19 @@ export function Deliverables() {
 
         <div className="rounded-lg bg-white p-5 text-zinc-950 sm:p-7">
           <p className="text-xl font-black">Durante esse encontro, você terá:</p>
-          <ul className="mt-6 grid gap-4" aria-label="Entregáveis do workshop">
-            {deliverables.map((deliverable) => (
+          <ul
+            className="mt-6 grid gap-4"
+            aria-label="Entregáveis do workshop"
+            ref={checklistRef}
+          >
+            {deliverables.map((deliverable, index) => (
               <li
-                className="flex gap-4 rounded-lg border border-zinc-200 bg-zinc-50 p-4"
+                className={`delay-${(index + 1) * 100} flex gap-4 rounded-lg border border-zinc-200 bg-zinc-50 p-4 transition-all duration-500 ${
+                  checklistInView
+                    ? "is-visible opacity-100 translate-y-0"
+                    : "opacity-0 translate-y-4"
+                }`}
+                data-testid="deliverable-item"
                 key={deliverable.title}
               >
                 <span
