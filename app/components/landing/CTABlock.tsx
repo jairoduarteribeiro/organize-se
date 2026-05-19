@@ -40,7 +40,10 @@ export function CTABlock() {
             className="rounded-lg border border-white/15 bg-white/10 px-2 py-3 text-white"
             key={unit}
           >
-            <span className="block text-2xl font-black tabular-nums leading-none sm:text-4xl">
+            <span
+              className="block text-2xl font-black tabular-nums leading-none sm:text-4xl"
+              suppressHydrationWarning
+            >
               {formatCountdownUnit(value)}
             </span>
             <span className="mt-2 block text-[0.68rem] font-bold uppercase tracking-[0.12em] text-white/75 sm:text-xs">

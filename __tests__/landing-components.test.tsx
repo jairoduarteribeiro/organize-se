@@ -1,15 +1,18 @@
-import { render, screen, within } from "@testing-library/react";
+import { afterEach, describe, expect, it, vi } from "vitest";
+import { cleanup, render, screen, within } from "@testing-library/react";
 import type { ImgHTMLAttributes } from "react";
 import { createElement } from "react";
-import { describe, expect, it, vi } from "vitest";
 
 import { BioSection } from "@/app/components/landing/BioSection";
 import { Deliverables } from "@/app/components/landing/Deliverables";
 import { FaqAccordion } from "@/app/components/landing/FaqAccordion";
+import { FinalCTA } from "@/app/components/landing/FinalCTA";
 import { GuaranteeSeal } from "@/app/components/landing/GuaranteeSeal";
+import { HeroSection } from "@/app/components/landing/HeroSection";
 import { PainQualifier } from "@/app/components/landing/PainQualifier";
+import { PriceBlock } from "@/app/components/landing/PriceBlock";
 import { Testimonials } from "@/app/components/landing/Testimonials";
-import { INSTAGRAM_URL } from "@/app/lib/constants";
+import { INSTAGRAM_URL, KIWIFY_URL } from "@/app/lib/constants";
 
 vi.mock("next/image", () => ({
   default(props: ImgHTMLAttributes<HTMLImageElement> & {
@@ -26,6 +29,10 @@ vi.mock("next/image", () => ({
 }));
 
 describe("static landing Server Components", () => {
+  afterEach(() => {
+    cleanup();
+  });
+
   it("PainQualifier renders exactly 7 pain point list items", () => {
     render(<PainQualifier />);
 
@@ -78,15 +85,44 @@ describe("static landing Server Components", () => {
     expect(within(list).getAllByRole("listitem")).toHaveLength(4);
   });
 
+  it("HeroSection renders an image with non-empty alt text and a Kiwify CTA", () => {
+    render(<HeroSection />);
+
+    const heroImages = screen.getAllByRole("img");
+    const heroCta = screen.getByRole("link", {
+      name: /quero garantir meu ingresso/i,
+    });
+
+    expect(heroImages.length).toBeGreaterThan(0);
+    expect(heroImages[0].getAttribute("alt")?.trim()).toBeTruthy();
+    expect(heroCta.getAttribute("href")).toContain("kiwify.com.br");
+    expect(heroCta.getAttribute("href")).toBe(KIWIFY_URL);
+  });
+
+  it('PriceBlock renders the "R$ 47" price', () => {
+    render(<PriceBlock />);
+
+    expect(screen.getByText("R$ 47")).toBeTruthy();
+  });
+
+  it('FinalCTA renders guarantee copy containing "garantia"', () => {
+    render(<FinalCTA />);
+
+    expect(screen.getByText("7 dias de garantia")).toBeTruthy();
+  });
+
   it("renders every component without empty image alt attributes", () => {
     render(
       <>
+        <HeroSection />
         <PainQualifier />
         <Testimonials />
         <BioSection />
         <GuaranteeSeal />
         <FaqAccordion />
         <Deliverables />
+        <PriceBlock />
+        <FinalCTA />
       </>,
     );
 

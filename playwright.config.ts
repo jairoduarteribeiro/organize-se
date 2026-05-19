@@ -6,5 +6,11 @@ export default defineConfig({
   timeout: 30_000,
   use: {
     ...devices["Desktop Chrome"],
+    baseURL: "http://localhost:3000",
+  },
+  webServer: {
+    command: "bun run dev",
+    reuseExistingServer: true,
+    url: "http://localhost:3000",
   },
 });
