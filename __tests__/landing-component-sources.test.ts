@@ -67,7 +67,35 @@ describe("static landing component source constraints", () => {
     );
 
     expect(source).toContain("priority: true");
-    expect(source).toContain('sizes="(max-width: 640px) 100vw, (max-width: 1024px) 100vw, 1280px"');
+    expect(source.match(/priority: true/g) ?? []).toHaveLength(1);
+    expect(source).toContain('sizes="(max-width: 640px) 50vw, (max-width: 1024px) 100vw, 1280px"');
+    expect(source).toContain('fetchPriority={image.priority ? "high" : "auto"}');
+    expect(source).toContain('loading={image.priority ? undefined : "lazy"}');
+  });
+
+  it("keeps landing Image components protected against layout shift", () => {
+    const imageComponentFiles = ["HeroSection.tsx", "Testimonials.tsx", "BioSection.tsx"];
+
+    for (const file of imageComponentFiles) {
+      const source = readFileSync(
+        join(process.cwd(), "app/components/landing", file),
+        "utf8",
+      );
+      const imageBlocks = source.match(/<Image[\s\S]*?\/>/g) ?? [];
+
+      expect(imageBlocks.length, `${file} should render at least one Image`).toBeGreaterThan(0);
+
+      for (const imageBlock of imageBlocks) {
+        const hasExplicitDimensions =
+          /\bwidth=/.test(imageBlock) && /\bheight=/.test(imageBlock);
+        const usesFill = /\bfill\b/.test(imageBlock);
+
+        expect(
+          hasExplicitDimensions || usesFill,
+          `${file} has an Image without width/height or fill: ${imageBlock}`,
+        ).toBe(true);
+      }
+    }
   });
 
   it('keeps app/page.tsx as a Server Component without "use client"', () => {

@@ -1,7 +1,12 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  experimental: {
+    inlineCss: true,
+  },
+  images: {
+    qualities: [10, 25, 50, 70, 75],
+  },
 };
 
 export default nextConfig;

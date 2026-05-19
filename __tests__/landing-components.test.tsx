@@ -23,9 +23,11 @@ vi.mock("next/image", () => ({
     const { fill, priority, ...imageProps } = props;
 
     void fill;
-    void priority;
 
-    return createElement("img", imageProps);
+    return createElement("img", {
+      ...imageProps,
+      "data-priority": priority ? "true" : undefined,
+    });
   },
 }));
 
@@ -179,6 +181,14 @@ describe("static landing Server Components", () => {
     expect(heroImages[0].getAttribute("alt")?.trim()).toBeTruthy();
     expect(heroCta.getAttribute("href")).toContain("kiwify.com.br");
     expect(heroCta.getAttribute("href")).toBe(KIWIFY_URL);
+  });
+
+  it("HeroSection marks the first rendered hero image as priority", () => {
+    render(<HeroSection />);
+
+    const heroImages = screen.getAllByRole("img");
+
+    expect(heroImages[0].getAttribute("data-priority")).toBe("true");
   });
 
   it('PriceBlock renders the "R$ 47" price', () => {

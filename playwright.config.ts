@@ -9,7 +9,7 @@ export default defineConfig({
     baseURL: "http://localhost:3000",
   },
   webServer: {
-    command: "bun run dev",
+    command: "bun run build && bun run start",
     reuseExistingServer: true,
     url: "http://localhost:3000",
   },

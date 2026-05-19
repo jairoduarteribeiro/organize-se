@@ -21,6 +21,8 @@ export function BioSection() {
             alt="Rafaela Ribeiro, educadora financeira do Workshop Organize-se."
             className="h-auto w-full object-cover"
             height={1254}
+            loading="lazy"
+            quality={70}
             sizes="(max-width: 1024px) 100vw, 40vw"
             src="/images/rafa.png"
             width={1254}

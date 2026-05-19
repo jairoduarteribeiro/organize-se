@@ -8,7 +8,7 @@ const heroImages = [
     alt: "Workshop Organize-se apresentado em formato vertical para leitura no celular.",
     width: 941,
     height: 1672,
-    className: "block sm:hidden",
+    className: "block h-[42vh] w-full object-cover sm:hidden",
     priority: true,
   },
   {
@@ -16,7 +16,7 @@ const heroImages = [
     alt: "Workshop Organize-se com arte vertical otimizada para tablets.",
     width: 1122,
     height: 1402,
-    className: "hidden sm:block lg:hidden",
+    className: "hidden h-auto w-full object-cover sm:block lg:hidden",
     priority: false,
   },
   {
@@ -24,7 +24,7 @@ const heroImages = [
     alt: "Workshop Organize-se com Rafaela Ribeiro e chamada para organizar as finanças.",
     width: 1672,
     height: 941,
-    className: "hidden lg:block",
+    className: "hidden h-auto w-full object-cover lg:block",
     priority: false,
   },
 ] as const;
@@ -40,12 +40,15 @@ export function HeroSection() {
           {heroImages.map((image) => (
             <Image
               alt={image.alt}
-              className={`${image.className} h-auto w-full object-cover`}
-              fetchPriority="high"
+              className={image.className}
+              decoding={image.priority ? "sync" : "async"}
+              fetchPriority={image.priority ? "high" : "auto"}
               height={image.height}
               key={image.src}
+              loading={image.priority ? undefined : "lazy"}
               priority={image.priority}
-              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 100vw, 1280px"
+              quality={10}
+              sizes="(max-width: 640px) 50vw, (max-width: 1024px) 100vw, 1280px"
               src={image.src}
               width={image.width}
             />

@@ -71,6 +71,8 @@ export function Testimonials() {
                 alt={testimonial.alt}
                 className="h-auto w-full rounded-md object-contain"
                 height={testimonial.height}
+                loading="lazy"
+                quality={70}
                 sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                 src={testimonial.src}
                 width={testimonial.width}
