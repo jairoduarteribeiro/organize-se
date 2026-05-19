@@ -2,8 +2,8 @@
 
 import { useRef } from "react";
 
+import { CTABlock } from "@/app/components/landing/CTABlock";
 import { useInView } from "@/app/hooks/useInView";
-import { KIWIFY_URL } from "@/app/lib/constants";
 
 const painPoints = [
   "💸 Não tem uma reserva financeira e sente que nunca consegue guardar nada.",
@@ -65,14 +65,9 @@ export function PainQualifier() {
             Se você leu essa lista e pensou “é exatamente o meu caso”, o
             Organize-$e é o seu próximo passo para salvar o seu ano.
           </p>
-          <a
-            className="mt-6 inline-flex min-h-12 w-full items-center justify-center rounded-md bg-emerald-400 px-6 py-3 text-center text-base font-black uppercase text-zinc-950 transition-colors hover:bg-emerald-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-emerald-300 sm:w-auto"
-            href={KIWIFY_URL}
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            Quero garantir meu ingresso
-          </a>
+          <div className="mt-6 w-full max-w-2xl">
+            <CTABlock />
+          </div>
         </div>
       </div>
     </section>

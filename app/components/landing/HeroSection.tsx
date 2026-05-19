@@ -41,6 +41,7 @@ export function HeroSection() {
             <Image
               alt={image.alt}
               className={`${image.className} h-auto w-full object-cover`}
+              fetchPriority="high"
               height={image.height}
               key={image.src}
               priority={image.priority}
