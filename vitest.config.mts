@@ -8,7 +8,11 @@ export default defineConfig({
   },
   test: {
     coverage: {
-      include: ["app/hooks/**/*.ts", "app/lib/**/*.ts"],
+      include: [
+        "app/components/landing/**/*.tsx",
+        "app/hooks/**/*.ts",
+        "app/lib/**/*.ts",
+      ],
       thresholds: {
         branches: 80,
         functions: 80,
