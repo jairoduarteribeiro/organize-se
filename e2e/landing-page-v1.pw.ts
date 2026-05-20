@@ -111,6 +111,22 @@ function getCheckoutButtons(page: Page) {
   return page.getByRole("link", { name: /quero garantir meu ingresso/i });
 }
 
+function getHeroSection(page: Page) {
+  return page.locator('section[aria-labelledby="hero-title"]');
+}
+
+function getHeroTitle(page: Page) {
+  return getHeroSection(page).getByRole("heading", { level: 1 });
+}
+
+function getHeroMobileImage(page: Page) {
+  return getHeroSection(page).locator('img[alt*="celular"]');
+}
+
+function getHeroTabletImage(page: Page) {
+  return getHeroSection(page).locator('img[alt*="tablets"]');
+}
+
 async function expectElementToBeCenteredAtViewportMidpoint(
   page: Page,
   selectorName: PainQualifierCenteredElement,
@@ -375,6 +391,104 @@ test.describe("landing-page-v1 task 09 Playwright suite", () => {
 
     expect(animationNames.length).toBeGreaterThan(0);
     expect(animationNames.every((name) => name === "none")).toBe(true);
+  });
+
+  test("renders the hero title above the image on mobile", async ({ page }) => {
+    await page.setViewportSize({ width: 375, height: 812 });
+    await page.goto("/");
+
+    const heroTitle = getHeroTitle(page);
+    const heroImage = getHeroMobileImage(page);
+
+    await expect(heroTitle).toBeVisible();
+    await expect(heroImage).toBeVisible();
+
+    const titleBox = await heroTitle.boundingBox();
+    const imageBox = await heroImage.boundingBox();
+
+    expect(titleBox, "hero title bounding box should be available").not.toBeNull();
+    expect(imageBox, "hero mobile image bounding box should be available").not.toBeNull();
+    expect(titleBox!.y).toBeLessThan(imageBox!.y);
+  });
+
+  test("keeps the hero image above the title at tablet and larger viewports", async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width: 768, height: 1024 });
+    await page.goto("/");
+
+    const heroTitle = getHeroTitle(page);
+    const heroImage = getHeroTabletImage(page);
+
+    await expect(heroTitle).toBeVisible();
+    await expect(heroImage).toBeVisible();
+
+    const titleBox = await heroTitle.boundingBox();
+    const imageBox = await heroImage.boundingBox();
+
+    expect(titleBox, "hero title bounding box should be available").not.toBeNull();
+    expect(imageBox, "hero tablet image bounding box should be available").not.toBeNull();
+    expect(imageBox!.y).toBeLessThan(titleBox!.y);
+  });
+
+  test("keeps countdown labels visible without grid overflow at 320px", async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width: 320, height: 568 });
+    await page.goto("/");
+
+    const countdownGrids = page.getByLabel("Contagem regressiva para o workshop");
+    await expect(countdownGrids.first()).toBeVisible();
+
+    const gridResults = await countdownGrids.evaluateAll((grids) =>
+      grids.map((grid) => {
+        const labels = ["dias", "horas", "minutos", "segundos"];
+        const elements = Array.from(grid.querySelectorAll("*"));
+        const overflowingElements = elements
+          .filter((element) => element.scrollWidth > element.clientWidth)
+          .map((element) => ({
+            className: element.getAttribute("class"),
+            clientWidth: element.clientWidth,
+            scrollWidth: element.scrollWidth,
+            text: element.textContent?.trim(),
+          }));
+        const labelVisibility = labels.map((label) => {
+          const element = Array.from(grid.querySelectorAll("span")).find(
+            (span) => span.textContent?.trim().toLowerCase() === label,
+          );
+          const box = element?.getBoundingClientRect();
+          const styles = element ? getComputedStyle(element) : null;
+
+          return {
+            label,
+            visible: Boolean(
+              box &&
+                box.width > 0 &&
+                box.height > 0 &&
+                styles?.visibility !== "hidden" &&
+                styles?.display !== "none",
+            ),
+          };
+        });
+
+        return {
+          overflowingElements,
+          labelVisibility,
+        };
+      }),
+    );
+
+    expect(gridResults.length).toBeGreaterThan(0);
+
+    for (const result of gridResults) {
+      expect(result.overflowingElements).toEqual([]);
+      expect(result.labelVisibility).toEqual([
+        { label: "dias", visible: true },
+        { label: "horas", visible: true },
+        { label: "minutos", visible: true },
+        { label: "segundos", visible: true },
+      ]);
+    }
   });
 
   for (const viewport of responsiveViewports) {

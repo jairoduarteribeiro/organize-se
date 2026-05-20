@@ -37,7 +37,7 @@ export function CTABlock() {
       >
         {countdownItems.map(([unit, value]) => (
           <div
-            className="rounded-lg border border-white/15 bg-white/10 px-2 py-3 text-white"
+            className="min-w-0 rounded-lg border border-white/15 bg-white/10 px-0 py-3 text-white sm:px-2"
             key={unit}
           >
             <span
@@ -46,7 +46,7 @@ export function CTABlock() {
             >
               {formatCountdownUnit(value)}
             </span>
-            <span className="mt-2 block text-[0.68rem] font-bold uppercase tracking-[0.12em] text-white/75 sm:text-xs">
+            <span className="mt-2 block text-[8px] font-bold uppercase tracking-normal text-white/75 min-[360px]:text-[10px] sm:text-xs sm:tracking-[0.12em]">
               {countdownLabels[unit]}
             </span>
           </div>
