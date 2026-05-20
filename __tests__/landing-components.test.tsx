@@ -106,10 +106,16 @@ describe("static landing Server Components", () => {
     );
   });
 
-  it('GuaranteeSeal renders text containing "7 dias de garantia"', () => {
-    render(<GuaranteeSeal />);
+  it("GuaranteeSeal renders the circular stamp copy and accessible label", () => {
+    const { container } = render(<GuaranteeSeal />);
 
-    expect(screen.getByText(/7 dias de garantia/i)).toBeTruthy();
+    const seal = container.querySelector(
+      '[aria-label="7 dias de garantia — satisfação garantida ou seu dinheiro de volta"]',
+    );
+
+    expect(seal).toBeTruthy();
+    expect(screen.getByText("7 DIAS")).toBeTruthy();
+    expect(screen.getByText("GARANTIA")).toBeTruthy();
   });
 
   it("FaqAccordion renders exactly 5 details elements", () => {
@@ -197,10 +203,15 @@ describe("static landing Server Components", () => {
     expect(screen.getByText("R$ 47")).toBeTruthy();
   });
 
-  it('FinalCTA renders guarantee copy containing "garantia"', () => {
+  it("FinalCTA renders the shared guarantee seal", () => {
     render(<FinalCTA />);
 
-    expect(screen.getByText("7 dias de garantia")).toBeTruthy();
+    expect(
+      screen.getByLabelText(
+        "7 dias de garantia — satisfação garantida ou seu dinheiro de volta",
+      ),
+    ).toBeTruthy();
+    expect(screen.getByText("7 DIAS")).toBeTruthy();
   });
 
   it("renders every component without empty image alt attributes", () => {

@@ -97,6 +97,16 @@ function getPainQualifierCtaWrapper(page: Page) {
   return getPainQualifierCountdown(page).locator("xpath=../..");
 }
 
+function getGuaranteeSeals(page: Page) {
+  return page.locator(
+    '[aria-label="7 dias de garantia — satisfação garantida ou seu dinheiro de volta"]',
+  );
+}
+
+function getInstagramHandleButton(page: Page) {
+  return page.getByRole("link", { name: /@rafaelaribeirofinancas/i });
+}
+
 async function expectElementToBeCenteredAtViewportMidpoint(
   page: Page,
   selectorName: PainQualifierCenteredElement,
@@ -231,6 +241,103 @@ test.describe("landing-page-v1 task 09 Playwright suite", () => {
       await expectElementToBeCenteredAtViewportMidpoint(page, "cta");
     });
   }
+
+  test("renders yellow circular guarantee seals with accessible labels and no emerald classes", async ({
+    page,
+  }) => {
+    await page.goto("/");
+
+    const seals = getGuaranteeSeals(page);
+    await expect(seals).toHaveCount(2);
+
+    const sealResults = await seals.evaluateAll((elements) =>
+      elements.map((element) => {
+        const styles = getComputedStyle(element);
+        const box = element.getBoundingClientRect();
+        const radius = styles.borderTopLeftRadius;
+        const classNames = [element, ...Array.from(element.querySelectorAll("*"))]
+          .map((node) => node.getAttribute("class") ?? "")
+          .join(" ");
+
+        return {
+          ariaLabel: element.getAttribute("aria-label"),
+          borderRadius: radius.endsWith("%")
+            ? (parseFloat(radius) / 100) * Math.min(box.width, box.height)
+            : parseFloat(radius),
+          classNames,
+          height: box.height,
+          width: box.width,
+        };
+      }),
+    );
+
+    for (const result of sealResults) {
+      expect(result.ariaLabel?.trim().length ?? 0).toBeGreaterThan(0);
+      expect(result.borderRadius).toBeGreaterThanOrEqual(
+        Math.min(result.width, result.height) / 2,
+      );
+      expect(result.classNames).not.toMatch(/emerald/i);
+    }
+  });
+
+  for (const viewport of responsiveViewports) {
+    test(`keeps guarantee seals circular without clipping at ${viewport.label} ${viewport.width}px`, async ({
+      page,
+    }) => {
+      await page.setViewportSize(viewport);
+      await page.goto("/");
+
+      const sealResults = await getGuaranteeSeals(page).evaluateAll((elements) =>
+        elements.map((element) => {
+          const box = element.getBoundingClientRect();
+
+          return {
+            clientHeight: element.clientHeight,
+            clientWidth: element.clientWidth,
+            height: box.height,
+            scrollHeight: element.scrollHeight,
+            scrollWidth: element.scrollWidth,
+            width: box.width,
+          };
+        }),
+      );
+
+      expect(sealResults.length).toBe(2);
+
+      for (const result of sealResults) {
+        expect(result.scrollWidth).toBeLessThanOrEqual(result.clientWidth);
+        expect(result.scrollHeight).toBeLessThanOrEqual(result.clientHeight);
+        expect(Math.abs(result.width - result.height)).toBeLessThanOrEqual(1);
+      }
+    });
+  }
+
+  test("renders the Instagram icon before the BioSection handle text", async ({
+    page,
+  }) => {
+    await page.goto("/");
+
+    const handleButton = getInstagramHandleButton(page);
+    await expect(handleButton.locator('svg[aria-hidden="true"]')).toHaveCount(1);
+
+    const iconPrecedesText = await handleButton.evaluate((element) => {
+      const icon = element.querySelector('svg[aria-hidden="true"]');
+      const handleTextNode = Array.from(element.childNodes).find(
+        (node) =>
+          node.nodeType === Node.TEXT_NODE &&
+          node.textContent?.includes("@rafaelaribeirofinancas"),
+      );
+
+      return Boolean(
+        icon &&
+          handleTextNode &&
+          (icon.compareDocumentPosition(handleTextNode) &
+            Node.DOCUMENT_POSITION_FOLLOWING),
+      );
+    });
+
+    expect(iconPrecedesText).toBe(true);
+  });
 
   for (const viewport of responsiveViewports) {
     test(`has no horizontal scrollbar at ${viewport.label} ${viewport.width}x${viewport.height}`, async ({

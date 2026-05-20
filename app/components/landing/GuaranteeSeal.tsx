@@ -5,22 +5,26 @@ type GuaranteeSealProps = {
 export function GuaranteeSeal({ className = "" }: GuaranteeSealProps) {
   return (
     <aside
-      aria-label="Garantia de satisfação"
+      aria-label="7 dias de garantia — satisfação garantida ou seu dinheiro de volta"
       className={[
-        "w-full rounded-lg border-2 border-yellow-300 bg-zinc-950 p-5 text-center text-white shadow-[0_0_40px_rgba(250,204,21,0.28)]",
+        "relative mx-auto flex aspect-square min-h-[160px] min-w-[160px] w-44 flex-col items-center justify-center rounded-full border-2 border-dashed border-yellow-300 bg-zinc-950 p-5 text-center text-yellow-300 shadow-[0_0_40px_rgba(250,204,21,0.28)] sm:w-48",
         className,
       ]
         .filter(Boolean)
         .join(" ")}
     >
-      <p className="text-sm font-black uppercase tracking-[0.18em] text-yellow-300">
-        Risco zero
+      <span
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-2 rounded-full border border-yellow-300/70"
+      />
+      <p className="relative text-xs font-black uppercase tracking-[0.24em]">
+        GARANTIA
       </p>
-      <p className="mt-2 font-display text-2xl font-black leading-tight text-emerald-300 sm:text-3xl">
-        7 dias de garantia
+      <p className="relative mt-1 font-display text-5xl font-black leading-none sm:text-6xl">
+        7 DIAS
       </p>
-      <p className="mx-auto mt-2 max-w-xl text-base font-semibold leading-7 text-zinc-100">
-        Satisfação garantida ou seu dinheiro de volta.
+      <p className="relative mt-2 max-w-32 text-[11px] font-bold uppercase leading-4 tracking-[0.08em] text-zinc-100">
+        Satisfação garantida ou seu dinheiro de volta
       </p>
     </aside>
   );

@@ -1,10 +1,17 @@
 "use client";
 
+import { createLucideIcon } from "lucide-react";
 import Image from "next/image";
 import { useRef } from "react";
 
 import { useInView } from "@/app/hooks/useInView";
 import { INSTAGRAM_URL } from "@/app/lib/constants";
+
+const Instagram = createLucideIcon("Instagram", [
+  ["rect", { width: "20", height: "20", x: "2", y: "2", rx: "5", ry: "5" }],
+  ["path", { d: "M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" }],
+  ["line", { x1: "17.5", x2: "17.51", y1: "6.5", y2: "6.5" }],
+]);
 
 export function BioSection() {
   const headingRef = useRef<HTMLDivElement>(null);
@@ -70,11 +77,12 @@ export function BioSection() {
             com leveza, propósito e prosperidade.”
           </blockquote>
           <a
-            className="mt-6 inline-flex min-h-12 items-center rounded-md border-2 border-zinc-950 px-5 py-3 text-base font-black text-zinc-950 transition-colors hover:bg-zinc-950 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-zinc-950"
+            className="mt-6 inline-flex min-h-12 items-center gap-2 rounded-md border-2 border-zinc-950 px-5 py-3 text-base font-black text-zinc-950 transition-colors hover:bg-zinc-950 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-zinc-950"
             href={INSTAGRAM_URL}
             rel="noopener noreferrer"
             target="_blank"
           >
+            <Instagram size={18} strokeWidth={1.75} aria-hidden="true" />
             @rafaelaribeirofinancas
           </a>
         </div>
