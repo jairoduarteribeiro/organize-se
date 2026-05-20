@@ -1,5 +1,5 @@
 ---
-status: pending
+status: completed
 title: WaitlistForm & Server Action
 type: backend
 complexity: medium
@@ -33,10 +33,10 @@ Implements the Phase 1 email capture surface: a `submitWaitlistEmail` Server Act
 </requirements>
 
 ## Subtasks
-- [ ] 5.1 Create `app/actions/` directory and implement `waitlist.ts` with `"use server"`, email validation, stdout log, and typed return value
-- [ ] 5.2 Create `WaitlistForm.tsx` in `app/components/landing/` with `"use client"`, `useActionState`, email input, submit button, and state feedback UI
-- [ ] 5.3 Update `CTABlock.tsx` to import `WaitlistForm` and remove the placeholder stub
-- [ ] 5.4 Write unit tests for the Server Action (valid email, invalid email, edge-case formats) and WaitlistForm (success state, error state rendering)
+- [x] 5.1 Create `app/actions/` directory and implement `waitlist.ts` with `"use server"`, email validation, stdout log, and typed return value
+- [x] 5.2 Create `WaitlistForm.tsx` in `app/components/landing/` with `"use client"`, `useActionState`, email input, submit button, and state feedback UI
+- [x] 5.3 Update `CTABlock.tsx` to import `WaitlistForm` and remove the placeholder stub
+- [x] 5.4 Write unit tests for the Server Action (valid email, invalid email, edge-case formats) and WaitlistForm (success state, error state rendering)
 
 ## Implementation Details
 See TechSpec "API Endpoints" table and "Implementation Design" section for the exact `WaitlistActionResult` type and `submitWaitlistEmail` signature. See ADR-003 "Implementation Notes" for the Phase 2 upgrade path — structure the action so the `console.log` line is the only thing that changes in Phase 2. Portuguese copy for success/error messages must match the page's Brazilian Portuguese tone.
@@ -61,16 +61,16 @@ See TechSpec "API Endpoints" table and "Implementation Design" section for the e
 
 ## Tests
 - Unit tests:
-  - [ ] `submitWaitlistEmail` with `email=teste@email.com` returns `{ success: true }`
-  - [ ] `submitWaitlistEmail` with `email=not-an-email` returns `{ success: false, error: "Email inválido." }`
-  - [ ] `submitWaitlistEmail` with `email=` (empty string) returns `{ success: false, error: "Email inválido." }`
-  - [ ] `submitWaitlistEmail` with `email=a@b.c` (minimal valid) returns `{ success: true }`
-  - [ ] `WaitlistForm` renders an email input and submit button
-  - [ ] `WaitlistForm` displays the error message text when rendered with an error state
-  - [ ] `WaitlistForm` displays a success message in Portuguese when rendered with `success: true` state
+  - [x] `submitWaitlistEmail` with `email=teste@email.com` returns `{ success: true }`
+  - [x] `submitWaitlistEmail` with `email=not-an-email` returns `{ success: false, error: "Email inválido." }`
+  - [x] `submitWaitlistEmail` with `email=` (empty string) returns `{ success: false, error: "Email inválido." }`
+  - [x] `submitWaitlistEmail` with `email=a@b.c` (minimal valid) returns `{ success: true }`
+  - [x] `WaitlistForm` renders an email input and submit button
+  - [x] `WaitlistForm` displays the error message text when rendered with an error state
+  - [x] `WaitlistForm` displays a success message in Portuguese when rendered with `success: true` state
 - Integration tests:
-  - [ ] Fill `WaitlistForm` email input with `teste@email.com`, submit, assert success message appears (Playwright)
-  - [ ] Fill `WaitlistForm` email input with `invalido`, submit, assert error message "Email inválido." appears (Playwright)
+  - [x] Fill `WaitlistForm` email input with `teste@email.com`, submit, assert success message appears (Playwright)
+  - [x] Fill `WaitlistForm` email input with `invalido`, submit, assert error message "Email inválido." appears (Playwright)
 - Test coverage target: >=80%
 - All tests must pass
 

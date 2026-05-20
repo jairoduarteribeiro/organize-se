@@ -1,5 +1,5 @@
 ---
-status: pending
+status: completed
 title: CSS Animation Utilities
 type: frontend
 complexity: low
@@ -29,12 +29,12 @@ Extends `app/globals.css` with the custom `@keyframes` and utility classes requi
 </requirements>
 
 ## Subtasks
-- [ ] 2.1 Add `@keyframes pulse-glow` and register it as a Tailwind animation utility
-- [ ] 2.2 Add `@keyframes fade-in` for section entrance animations
-- [ ] 2.3 Add `stagger-N` delay variant utilities (100ms increments up to 500ms)
-- [ ] 2.4 Add `@media (prefers-reduced-motion: reduce)` block that suppresses all animation/transition
-- [ ] 2.5 Add Safari `<details>` disclosure-marker suppression rules
-- [ ] 2.6 Verify no existing CSS variables or Tailwind directives were removed or overwritten
+- [x] 2.1 Add `@keyframes pulse-glow` and register it as a Tailwind animation utility
+- [x] 2.2 Add `@keyframes fade-in` for section entrance animations
+- [x] 2.3 Add `stagger-N` delay variant utilities (100ms increments up to 500ms)
+- [x] 2.4 Add `@media (prefers-reduced-motion: reduce)` block that suppresses all animation/transition
+- [x] 2.5 Add Safari `<details>` disclosure-marker suppression rules
+- [x] 2.6 Verify no existing CSS variables or Tailwind directives were removed or overwritten
 
 ## Implementation Details
 See TechSpec "Known Risks" for the Safari `<details>` marker detail, and ADR-004 "Implementation Notes" for the base + visible class pattern (`opacity-0 translate-y-4` → `opacity-100 translate-y-0`). The `pulse-glow` keyframe should produce a subtle box-shadow or scale pulse that draws attention to the CTA buttons without being distracting.
@@ -58,13 +58,13 @@ See TechSpec "Known Risks" for the Safari `<details>` marker detail, and ADR-004
 
 ## Tests
 - Unit tests:
-  - [ ] `globals.css` contains the string `pulse-glow` (keyframe definition present)
-  - [ ] `globals.css` contains `prefers-reduced-motion` media query
-  - [ ] `globals.css` contains `-webkit-details-marker` suppression rule
-  - [ ] `globals.css` contains `fade-in` keyframe definition
+  - [x] `globals.css` contains the string `pulse-glow` (keyframe definition present)
+  - [x] `globals.css` contains `prefers-reduced-motion` media query
+  - [x] `globals.css` contains `-webkit-details-marker` suppression rule
+  - [x] `globals.css` contains `fade-in` keyframe definition
 - Integration tests:
-  - [ ] Dev server starts without CSS compilation errors after changes
-  - [ ] An element with class `animate-pulse-glow` receives a computed `animation-name` value in the browser (Playwright assertion)
+  - [x] Dev server starts without CSS compilation errors after changes
+  - [x] An element with class `animate-pulse-glow` receives a computed `animation-name` value in the browser (Playwright assertion)
 - Test coverage target: >=80%
 - All tests must pass
 

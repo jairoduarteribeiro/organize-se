@@ -1,5 +1,5 @@
 ---
-status: pending
+status: completed
 title: Metadata & SEO
 type: chore
 complexity: low
@@ -30,9 +30,9 @@ Updates `app/layout.tsx` with the workshop-specific title, description, and Open
 </requirements>
 
 ## Subtasks
-- [ ] 8.1 Update the `metadata` export in `app/layout.tsx` with `title`, `description`, `openGraph` fields
-- [ ] 8.2 Set `og:image` to point to the hero image path in `public/images/`
-- [ ] 8.3 Verify `<title>` and `<meta description>` render in the SSR output
+- [x] 8.1 Update the `metadata` export in `app/layout.tsx` with `title`, `description`, `openGraph` fields
+- [x] 8.2 Set `og:image` to point to the hero image path in `public/images/`
+- [x] 8.3 Verify `<title>` and `<meta description>` render in the SSR output
 
 ## Implementation Details
 See TechSpec "Impact Analysis" row for `app/layout.tsx` ("Update metadata (title, description, OG tags for the workshop)"). Use the Next.js `Metadata` type for type safety. Workshop title and description copy should come from `content.docx` or PRD Overview section. The OG image path must match the asset placed by task_01 (`/images/hero1.png`).
@@ -53,13 +53,13 @@ None — metadata configuration is a standard Next.js pattern with no architectu
 
 ## Tests
 - Unit tests:
-  - [ ] `app/layout.tsx` exports a `metadata` object with a non-empty `title` string
-  - [ ] `metadata.description` is present and under 160 characters
-  - [ ] `metadata.openGraph.title` matches `metadata.title`
-  - [ ] `metadata.openGraph.images` contains at least one entry referencing a path starting with `/images/`
+  - [x] `app/layout.tsx` exports a `metadata` object with a non-empty `title` string
+  - [x] `metadata.description` is present and under 160 characters
+  - [x] `metadata.openGraph.title` matches `metadata.title`
+  - [x] `metadata.openGraph.images` contains at least one entry referencing a path starting with `/images/`
 - Integration tests:
-  - [ ] `curl http://localhost:3000` (or Playwright page source) contains `<title>` tag with workshop name (not "Create Next App")
-  - [ ] Page source contains `<meta property="og:title"` tag
+  - [x] `curl http://localhost:3000` (or Playwright page source) contains `<title>` tag with workshop name (not "Create Next App")
+  - [x] Page source contains `<meta property="og:title"` tag
 - Test coverage target: >=80%
 - All tests must pass
 

@@ -1,5 +1,5 @@
 ---
-status: pending
+status: completed
 title: CTABlock Client Component
 type: frontend
 complexity: medium
@@ -33,11 +33,11 @@ Implements `CTABlock.tsx` as the single `"use client"` component responsible for
 </requirements>
 
 ## Subtasks
-- [ ] 4.1 Create `app/components/landing/CTABlock.tsx` with `"use client"` directive
-- [ ] 4.2 Wire `useCountdown(EVENT_UTC)` and render the countdown display with "horário de Brasília" label
-- [ ] 4.3 Implement the Kiwify `<a>` button with `animate-pulse-glow` and 48px minimum height
-- [ ] 4.4 Implement the `isExpired` branch: hide countdown, render inline `<WaitlistForm />` stub (a placeholder `<div>` with a TODO comment)
-- [ ] 4.5 Write unit tests covering both the pre-event and post-event render states
+- [x] 4.1 Create `app/components/landing/CTABlock.tsx` with `"use client"` directive
+- [x] 4.2 Wire `useCountdown(EVENT_UTC)` and render the countdown display with "horário de Brasília" label
+- [x] 4.3 Implement the Kiwify `<a>` button with `animate-pulse-glow` and 48px minimum height
+- [x] 4.4 Implement the `isExpired` branch: hide countdown, render inline `<WaitlistForm />` stub (a placeholder `<div>` with a TODO comment)
+- [x] 4.5 Write unit tests covering both the pre-event and post-event render states
 
 ## Implementation Details
 See TechSpec "Core Interfaces" for the `useCountdown` return type and "Data Models" for constant paths. See TechSpec "Data flow" step 2 for how the `isExpired` flag drives the CTA switch. The stub for `WaitlistForm` is intentionally temporary — task_05 will replace it with a real import. Keep the stub minimal (a single `<div>` or comment placeholder) so task_05's diff is clean.
@@ -62,15 +62,15 @@ See TechSpec "Core Interfaces" for the `useCountdown` return type and "Data Mode
 
 ## Tests
 - Unit tests:
-  - [ ] When rendered with a future `EVENT_UTC`, countdown digits are visible and the Kiwify `<a>` button is present
-  - [ ] When rendered with a past `EVENT_UTC` (mocked `Date.now()`), countdown is hidden and the `WaitlistForm` stub is rendered
-  - [ ] Kiwify `<a>` button `href` equals `KIWIFY_URL` constant value
-  - [ ] Kiwify `<a>` button has `target="_blank"` attribute
-  - [ ] Kiwify `<a>` button has computed height ≥ 48px (rendered via jsdom or Playwright)
-  - [ ] The "horário de Brasília" label text is present in the DOM when countdown is visible
+  - [x] When rendered with a future `EVENT_UTC`, countdown digits are visible and the Kiwify `<a>` button is present
+  - [x] When rendered with a past `EVENT_UTC` (mocked `Date.now()`), countdown is hidden and the `WaitlistForm` stub is rendered
+  - [x] Kiwify `<a>` button `href` equals `KIWIFY_URL` constant value
+  - [x] Kiwify `<a>` button has `target="_blank"` attribute
+  - [x] Kiwify `<a>` button has computed height ≥ 48px (rendered via jsdom or Playwright)
+  - [x] The "horário de Brasília" label text is present in the DOM when countdown is visible
 - Integration tests:
-  - [ ] At viewport 375px, Kiwify button renders without horizontal overflow (Playwright)
-  - [ ] Countdown digits update every second when running in the browser (Playwright: wait 1100ms, assert digits changed)
+  - [x] At viewport 375px, Kiwify button renders without horizontal overflow (Playwright)
+  - [x] Countdown digits update every second when running in the browser (Playwright: wait 1100ms, assert digits changed)
 - Test coverage target: >=80%
 - All tests must pass
 

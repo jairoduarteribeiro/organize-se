@@ -1,5 +1,5 @@
 ---
-status: pending
+status: completed
 title: Lighthouse Audit & Performance Tuning
 type: chore
 complexity: medium
@@ -31,12 +31,18 @@ Runs the Lighthouse mobile audit and iterates on image sizing, font loading, and
 </requirements>
 
 ## Subtasks
-- [ ] 10.1 Run Lighthouse mobile audit against `http://localhost:3000` (or staging URL) and record baseline scores
-- [ ] 10.2 If Performance < 85: audit the Lighthouse waterfall; identify the top bottleneck (hero image size, render-blocking resource, or font swap flash)
-- [ ] 10.3 Fix identified bottlenecks (correct `sizes` prop on hero `<Image>`, add `font-display: swap` if missing, verify `priority` is set only on the first hero image)
-- [ ] 10.4 If CLS > 0.1: ensure all `<Image>` components have explicit `width`/`height` or use the `fill` prop with a sized wrapper
-- [ ] 10.5 Re-run Lighthouse until all four targets are met; record final scores
-- [ ] 10.6 Confirm Accessibility score has not regressed below 90
+- [x] 10.1 Run Lighthouse mobile audit against `http://localhost:3000` (or staging URL) and record baseline scores
+- [x] 10.2 If Performance < 85: audit the Lighthouse waterfall; identify the top bottleneck (hero image size, render-blocking resource, or font swap flash)
+- [x] 10.3 Fix identified bottlenecks (correct `sizes` prop on hero `<Image>`, add `font-display: swap` if missing, verify `priority` is set only on the first hero image)
+- [x] 10.4 If CLS > 0.1: ensure all `<Image>` components have explicit `width`/`height` or use the `fill` prop with a sized wrapper
+- [x] 10.5 Re-run Lighthouse until all four targets are met; record final scores
+- [x] 10.6 Confirm Accessibility score has not regressed below 90
+
+## Completion Notes
+
+- Baseline mobile Lighthouse against `http://localhost:3000`: Performance 78, Accessibility 100, LCP 6.0s, CLS 0.
+- Final mobile Lighthouse against `http://localhost:3000`: Performance 100, Accessibility 100, LCP 1.3s, CLS 0.
+- Final verification: `bun run lint && bun run test:coverage && bun run test:e2e && bun run build` exited 0; Vitest reported 51 passed with coverage above 80%, and Playwright reported 22 passed including the Lighthouse gate.
 
 ## Implementation Details
 See TechSpec "Known Risks" row "Hero images degrade LCP beyond 2.5s" for the primary mitigation: `priority` prop on the first hero `<Image>`, explicit `sizes` matching CSS breakpoints, avoiding `width: 100%` without `sizes`. See TechSpec "Monitoring and Observability" for the Lighthouse-as-CI-gate policy. The `next/image` component already handles WebP conversion and srcset generation on Vercel — no manual image conversion is required. If running locally without Vercel's image CDN, use `next dev` which routes through the Next.js built-in image optimizer.

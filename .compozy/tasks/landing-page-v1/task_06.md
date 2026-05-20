@@ -1,5 +1,5 @@
 ---
-status: pending
+status: completed
 title: Page Composition & CTA Sections
 type: frontend
 complexity: high
@@ -36,11 +36,11 @@ Implements the three remaining section components that embed `<CTABlock>` (`Hero
 </requirements>
 
 ## Subtasks
-- [ ] 6.1 Implement `HeroSection.tsx`: responsive `<Image>` with `priority`, `sizes`, and `srcset`; workshop `<h1>`; `<CTABlock />`; no text over image
-- [ ] 6.2 Implement `PriceBlock.tsx`: R$ 47 price display, `<CTABlock />`, `<GuaranteeSeal />`
-- [ ] 6.3 Implement `FinalCTA.tsx`: `<GuaranteeSeal />` and `<CTABlock />`
-- [ ] 6.4 Replace `app/page.tsx` with the Server Component orchestrator composing all 9 sections in ADR-001 order
-- [ ] 6.5 Verify a single `<h1>` exists on the rendered page and the Kiwify CTA link is functional
+- [x] 6.1 Implement `HeroSection.tsx`: responsive `<Image>` with `priority`, `sizes`, and `srcset`; workshop `<h1>`; `<CTABlock />`; no text over image
+- [x] 6.2 Implement `PriceBlock.tsx`: R$ 47 price display, `<CTABlock />`, `<GuaranteeSeal />`
+- [x] 6.3 Implement `FinalCTA.tsx`: `<GuaranteeSeal />` and `<CTABlock />`
+- [x] 6.4 Replace `app/page.tsx` with the Server Component orchestrator composing all 9 sections in ADR-001 order
+- [x] 6.5 Verify a single `<h1>` exists on the rendered page and the Kiwify CTA link is functional
 
 ## Implementation Details
 See TechSpec "Component Overview" for the full import tree, "Data flow" for the Server-to-Client composition pattern, and TechSpec "Impact Analysis" for the `app/page.tsx` change description. The ADR-001 section order is: Hero → PainQualifier → Testimonials → Deliverables → BioSection → PriceBlock (with GuaranteeSeal) → FaqAccordion → FinalCTA. Hero images are large (1.5–1.7 MB) — the `priority` and `sizes` props on `<Image>` are the primary LCP mitigation.
@@ -73,18 +73,18 @@ See TechSpec "Component Overview" for the full import tree, "Data flow" for the 
 
 ## Tests
 - Unit tests:
-  - [ ] `app/page.tsx` renders an `<h1>` element (SSR render assertion)
-  - [ ] `HeroSection` renders an `<img>` with a non-empty `alt` attribute
-  - [ ] `HeroSection` renders an `<a>` (via CTABlock) whose `href` contains the Kiwify domain
-  - [ ] `PriceBlock` renders text containing "R$ 47"
-  - [ ] `FinalCTA` renders a `<GuaranteeSeal>` child (contains "garantia" text)
-  - [ ] `app/page.tsx` contains exactly one `<h1>` element in its rendered HTML
+  - [x] `app/page.tsx` renders an `<h1>` element (SSR render assertion)
+  - [x] `HeroSection` renders an `<img>` with a non-empty `alt` attribute
+  - [x] `HeroSection` renders an `<a>` (via CTABlock) whose `href` contains the Kiwify domain
+  - [x] `PriceBlock` renders text containing "R$ 47"
+  - [x] `FinalCTA` renders a `<GuaranteeSeal>` child (contains "garantia" text)
+  - [x] `app/page.tsx` contains exactly one `<h1>` element in its rendered HTML
 - Integration tests:
-  - [ ] Page loads at `http://localhost:3000` without JS console errors (Playwright)
-  - [ ] Kiwify CTA `<a>` is visible and has `href` equal to `KIWIFY_URL` (Playwright)
-  - [ ] No horizontal scrollbar at viewport 375×812 (Playwright)
-  - [ ] No horizontal scrollbar at viewport 768×1024 (Playwright)
-  - [ ] No horizontal scrollbar at viewport 1280×800 (Playwright)
+  - [x] Page loads at `http://localhost:3000` without JS console errors (Playwright)
+  - [x] Kiwify CTA `<a>` is visible and has `href` equal to `KIWIFY_URL` (Playwright)
+  - [x] No horizontal scrollbar at viewport 375×812 (Playwright)
+  - [x] No horizontal scrollbar at viewport 768×1024 (Playwright)
+  - [x] No horizontal scrollbar at viewport 1280×800 (Playwright)
 - Test coverage target: >=80%
 - All tests must pass
 

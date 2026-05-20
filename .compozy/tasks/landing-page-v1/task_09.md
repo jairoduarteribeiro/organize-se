@@ -1,5 +1,5 @@
 ---
-status: pending
+status: completed
 title: Playwright Test Suite
 type: test
 complexity: high
@@ -33,13 +33,13 @@ Writes and runs the full Playwright test suite defined in the TechSpec's Testing
 </requirements>
 
 ## Subtasks
-- [ ] 9.1 Check the existing `.playwright/` config and create or update the spec file location
-- [ ] 9.2 Write navigation/content tests: page load, `<h1>`, Kiwify CTA href/target, FAQ accordion open
-- [ ] 9.3 Write responsiveness tests for all three viewports including CTA touch-target height assertion
-- [ ] 9.4 Write accessibility test: `axe-playwright` scan asserting score ≥ 90 and all `<img>` `alt` attributes non-empty
-- [ ] 9.5 Write post-event state test: mock `Date.now()` past `EVENT_UTC`, assert CTA hidden and waitlist input visible
-- [ ] 9.6 Write waitlist form test: fill, submit, assert success message
-- [ ] 9.7 Run the full suite via `playwright-cli` skill; fix any failures
+- [x] 9.1 Check the existing `.playwright/` config and create or update the spec file location
+- [x] 9.2 Write navigation/content tests: page load, `<h1>`, Kiwify CTA href/target, FAQ accordion open
+- [x] 9.3 Write responsiveness tests for all three viewports including CTA touch-target height assertion
+- [x] 9.4 Write accessibility test: `axe-playwright` scan asserting score ≥ 90 and all `<img>` `alt` attributes non-empty
+- [x] 9.5 Write post-event state test: mock `Date.now()` past `EVENT_UTC`, assert CTA hidden and waitlist input visible
+- [x] 9.6 Write waitlist form test: fill, submit, assert success message
+- [x] 9.7 Run the full suite via `playwright-cli` skill; fix any failures
 
 ## Implementation Details
 See TechSpec "Testing Approach — Playwright Tests" for the exact list of assertions required. The project already has a `.playwright/` directory — check its contents for an existing config before creating a new one. The post-event state mock requires overriding `Date.now()` in the browser context (`page.addInitScript`); `EVENT_UTC` is `2026-06-28T13:00:00.000Z`. The `playwright-cli` skill handles running Playwright — invoke it once tests are written.
@@ -66,18 +66,18 @@ See TechSpec "Testing Approach — Playwright Tests" for the exact list of asser
 ## Tests
 - Unit tests: N/A (Playwright tests are the deliverable)
 - Integration tests:
-  - [ ] Page loads at `http://localhost:3000` without JS console errors
-  - [ ] `<h1>` is present and non-empty
-  - [ ] Kiwify CTA `<a>` href equals `https://pay.kiwify.com.br/3qkvzij`
-  - [ ] Kiwify CTA `<a>` has `target="_blank"`
-  - [ ] Clicking first FAQ `<summary>` causes its parent `<details>` to gain the `open` attribute
-  - [ ] Viewport 375×812: no horizontal scrollbar; CTA button height ≥ 48px
-  - [ ] Viewport 768×1024: no horizontal scrollbar
-  - [ ] Viewport 1280×800: no horizontal scrollbar
-  - [ ] `axe-playwright` accessibility audit passes (or Lighthouse accessibility ≥ 90)
-  - [ ] All `<img>` elements have non-empty `alt` attributes
-  - [ ] With `Date.now()` mocked past `EVENT_UTC`: Kiwify button not in DOM; waitlist input visible
-  - [ ] Waitlist form: fill `teste@email.com`, submit, success message appears
+  - [x] Page loads at `http://localhost:3000` without JS console errors
+  - [x] `<h1>` is present and non-empty
+  - [x] Kiwify CTA `<a>` href equals `https://pay.kiwify.com.br/3qkvzij`
+  - [x] Kiwify CTA `<a>` has `target="_blank"`
+  - [x] Clicking first FAQ `<summary>` causes its parent `<details>` to gain the `open` attribute
+  - [x] Viewport 375×812: no horizontal scrollbar; CTA button height ≥ 48px
+  - [x] Viewport 768×1024: no horizontal scrollbar
+  - [x] Viewport 1280×800: no horizontal scrollbar
+  - [x] `axe-playwright` accessibility audit passes (or Lighthouse accessibility ≥ 90)
+  - [x] All `<img>` elements have non-empty `alt` attributes
+  - [x] With `Date.now()` mocked past `EVENT_UTC`: Kiwify button not in DOM; waitlist input visible
+  - [x] Waitlist form: fill `teste@email.com`, submit, success message appears
 - Test coverage target: >=80%
 - All tests must pass
 

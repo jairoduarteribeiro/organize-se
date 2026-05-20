@@ -1,5 +1,5 @@
 ---
-status: pending
+status: completed
 title: Static Server Component Sections
 type: frontend
 complexity: high
@@ -33,13 +33,13 @@ Implements the six content sections that contain no client-side interactivity an
 </requirements>
 
 ## Subtasks
-- [ ] 3.1 Create `app/components/landing/` directory and implement `PainQualifier.tsx` with 7 emoji-prefixed pain points and closing CTA redirect link
-- [ ] 3.2 Implement `Testimonials.tsx` rendering 4 testimonial images in a responsive grid using `next/image`
-- [ ] 3.3 Implement `BioSection.tsx` with `rafa.png` (via `next/image`), bio text, and `INSTAGRAM_URL` link
-- [ ] 3.4 Implement `GuaranteeSeal.tsx` as a visually prominent badge with bright contrasting colors (gold/vibrant green on dark background) per PRD Feature 8
-- [ ] 3.5 Implement `FaqAccordion.tsx` with 5 `<details>/<summary>` items, chevron rotation, and `max-height` CSS transition per ADR-005
-- [ ] 3.6 Implement `Deliverables.tsx` with event logistics (date, time, platform) and 4-item checklist (structure only; animation wiring is task_07)
-- [ ] 3.7 Write accessibility and rendering tests for each component
+- [x] 3.1 Create `app/components/landing/` directory and implement `PainQualifier.tsx` with 7 emoji-prefixed pain points and closing CTA redirect link
+- [x] 3.2 Implement `Testimonials.tsx` rendering 4 testimonial images in a responsive grid using `next/image`
+- [x] 3.3 Implement `BioSection.tsx` with `rafa.png` (via `next/image`), bio text, and `INSTAGRAM_URL` link
+- [x] 3.4 Implement `GuaranteeSeal.tsx` as a visually prominent badge with bright contrasting colors (gold/vibrant green on dark background) per PRD Feature 8
+- [x] 3.5 Implement `FaqAccordion.tsx` with 5 `<details>/<summary>` items, chevron rotation, and `max-height` CSS transition per ADR-005
+- [x] 3.6 Implement `Deliverables.tsx` with event logistics (date, time, platform) and 4-item checklist (structure only; animation wiring is task_07)
+- [x] 3.7 Write accessibility and rendering tests for each component
 
 ## Implementation Details
 See TechSpec "Component Overview" for the file paths and PRD Features 2–5, 6, 8, 9 for section-specific content requirements. Read `content.docx` for the actual copy (pain points, FAQ questions and answers, bio text, deliverables list). The `GuaranteeSeal` will be imported by both `PriceBlock` and `FinalCTA` in task_06 — keep its interface prop-free or accept only optional className.
@@ -72,17 +72,17 @@ See TechSpec "Component Overview" for the file paths and PRD Features 2–5, 6, 
 
 ## Tests
 - Unit tests:
-  - [ ] `PainQualifier` renders exactly 7 list items
-  - [ ] `Testimonials` renders 4 `<img>` elements with non-empty `alt` attributes
-  - [ ] `BioSection` renders an anchor whose `href` equals `INSTAGRAM_URL`
-  - [ ] `GuaranteeSeal` renders text containing "7 dias de garantia"
-  - [ ] `FaqAccordion` renders 5 `<details>` elements
-  - [ ] `Deliverables` renders a list with exactly 4 checklist items
-  - [ ] All components render without throwing in a Node.js SSR environment (no window/document access)
+  - [x] `PainQualifier` renders exactly 7 list items
+  - [x] `Testimonials` renders 4 `<img>` elements with non-empty `alt` attributes
+  - [x] `BioSection` renders an anchor whose `href` equals `INSTAGRAM_URL`
+  - [x] `GuaranteeSeal` renders text containing "7 dias de garantia"
+  - [x] `FaqAccordion` renders 5 `<details>` elements
+  - [x] `Deliverables` renders a list with exactly 4 checklist items
+  - [x] All components render without throwing in a Node.js SSR environment (no window/document access)
 - Integration tests:
-  - [ ] `FaqAccordion`: first `<summary>` is keyboard-focusable; pressing Enter opens its `<details>` (Playwright)
-  - [ ] `FaqAccordion`: `<details>` gains `open` attribute after clicking the first `<summary>` (Playwright)
-  - [ ] All images on the page have non-empty `alt` attributes (Playwright `axe` scan or attribute assertion)
+  - [x] `FaqAccordion`: first `<summary>` is keyboard-focusable; pressing Enter opens its `<details>` (Playwright)
+  - [x] `FaqAccordion`: `<details>` gains `open` attribute after clicking the first `<summary>` (Playwright)
+  - [x] All images on the page have non-empty `alt` attributes (Playwright `axe` scan or attribute assertion)
 - Test coverage target: >=80%
 - All tests must pass
 

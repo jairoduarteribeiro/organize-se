@@ -1,5 +1,5 @@
 ---
-status: pending
+status: completed
 title: Project Scaffold & Asset Setup
 type: chore
 complexity: medium
@@ -29,13 +29,13 @@ Creates the foundational layer that all other tasks depend on: shared TypeScript
 </requirements>
 
 ## Subtasks
-- [ ] 1.1 Create `app/lib/` directory and `constants.ts` with all three exported constants
-- [ ] 1.2 Create `app/hooks/` directory and implement `useCountdown.ts` per TechSpec Core Interfaces
-- [ ] 1.3 Implement `useInView.ts` per TechSpec Core Interfaces with SSR guard and `once` option
-- [ ] 1.4 Create `public/images/` and `public/images/testimonials/` directories
-- [ ] 1.5 Copy `fotos/hero1.png`, `fotos/hero2.png`, `fotos/hero3.png`, `fotos/rafa.png` into `public/images/`
-- [ ] 1.6 Copy `depoimentos/IMG_6269.jpg` through `IMG_6272.jpg` into `public/images/testimonials/`
-- [ ] 1.7 Write unit tests for `useCountdown` (active countdown, expired state, cleanup) and `useInView` (inView toggle, SSR fallback)
+- [x] 1.1 Create `app/lib/` directory and `constants.ts` with all three exported constants
+- [x] 1.2 Create `app/hooks/` directory and implement `useCountdown.ts` per TechSpec Core Interfaces
+- [x] 1.3 Implement `useInView.ts` per TechSpec Core Interfaces with SSR guard and `once` option
+- [x] 1.4 Create `public/images/` and `public/images/testimonials/` directories
+- [x] 1.5 Copy `fotos/hero1.png`, `fotos/hero2.png`, `fotos/hero3.png`, `fotos/rafa.png` into `public/images/`
+- [x] 1.6 Copy `depoimentos/IMG_6269.jpg` through `IMG_6272.jpg` into `public/images/testimonials/`
+- [x] 1.7 Write unit tests for `useCountdown` (active countdown, expired state, cleanup) and `useInView` (inView toggle, SSR fallback)
 
 ## Implementation Details
 See TechSpec "Core Interfaces" section for exact TypeScript signatures of `useCountdown` and `useInView`, and "Data Models" section for the three constants. The `useCountdown` hook drives the entire post-event state switch — correctness of `isExpired` is critical.
@@ -65,15 +65,15 @@ See TechSpec "Core Interfaces" section for exact TypeScript signatures of `useCo
 
 ## Tests
 - Unit tests:
-  - [ ] `useCountdown` with a future target returns non-expired state with positive `days`/`hours`/`minutes`/`seconds`
-  - [ ] `useCountdown` with a past target (`new Date(0)`) immediately returns `isExpired: true`
-  - [ ] `useCountdown` clears its interval when the component unmounts (no memory leak)
-  - [ ] `useInView` returns `false` initially and `true` after the IntersectionObserver fires with `isIntersecting: true`
-  - [ ] `useInView` returns `false` (not undefined/error) when called in an SSR context (`window` unavailable)
-  - [ ] `useInView` with `once: true` unobserves the element after the first `inView` trigger
+  - [x] `useCountdown` with a future target returns non-expired state with positive `days`/`hours`/`minutes`/`seconds`
+  - [x] `useCountdown` with a past target (`new Date(0)`) immediately returns `isExpired: true`
+  - [x] `useCountdown` clears its interval when the component unmounts (no memory leak)
+  - [x] `useInView` returns `false` initially and `true` after the IntersectionObserver fires with `isIntersecting: true`
+  - [x] `useInView` returns `false` (not undefined/error) when called in an SSR context (`window` unavailable)
+  - [x] `useInView` with `once: true` unobserves the element after the first `inView` trigger
 - Integration tests:
-  - [ ] `EVENT_UTC` resolves to a `Date` object; `.toISOString()` equals `'2026-06-28T13:00:00.000Z'`
-  - [ ] `KIWIFY_URL` starts with `https://pay.kiwify.com.br/`
+  - [x] `EVENT_UTC` resolves to a `Date` object; `.toISOString()` equals `'2026-06-28T13:00:00.000Z'`
+  - [x] `KIWIFY_URL` starts with `https://pay.kiwify.com.br/`
 - Test coverage target: >=80%
 - All tests must pass
 
