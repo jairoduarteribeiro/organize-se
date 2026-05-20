@@ -38,7 +38,9 @@ describe("CTABlock", () => {
     expect(link.getAttribute("href")).toBe(KIWIFY_URL);
     expect(link.getAttribute("target")).toBe("_blank");
     expect(link.getAttribute("rel")).toBe("noopener noreferrer");
-    expect(link.className).toContain("animate-pulse-glow");
+    expect(link.className).toContain("animate-scale-pulse");
+    expect(link.className).toContain("hover:animate-none");
+    expect(link.className).not.toContain("animate-pulse-glow");
     expect(parseFloat(getComputedStyle(link).minHeight)).toBeGreaterThanOrEqual(48);
   });
 

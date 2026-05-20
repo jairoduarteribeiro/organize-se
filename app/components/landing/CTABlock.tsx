@@ -58,7 +58,7 @@ export function CTABlock() {
       </p>
 
       <a
-        className="animate-pulse-glow mt-5 inline-flex min-h-12 w-full items-center justify-center rounded-md bg-yellow-300 px-6 py-3 text-center text-base font-black uppercase text-zinc-950 shadow-lg shadow-yellow-300/20 transition-colors hover:bg-yellow-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-yellow-200"
+        className="animate-scale-pulse mt-5 inline-flex min-h-12 w-full items-center justify-center rounded-md bg-yellow-300 px-6 py-3 text-center text-base font-black uppercase text-zinc-950 shadow-lg shadow-yellow-300/20 transition-colors hover:animate-none hover:bg-yellow-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-yellow-200"
         href={KIWIFY_URL}
         rel="noopener noreferrer"
         style={{ minHeight: "48px" }}

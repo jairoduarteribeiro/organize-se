@@ -107,6 +107,10 @@ function getInstagramHandleButton(page: Page) {
   return page.getByRole("link", { name: /@rafaelaribeirofinancas/i });
 }
 
+function getCheckoutButtons(page: Page) {
+  return page.getByRole("link", { name: /quero garantir meu ingresso/i });
+}
+
 async function expectElementToBeCenteredAtViewportMidpoint(
   page: Page,
   selectorName: PainQualifierCenteredElement,
@@ -337,6 +341,40 @@ test.describe("landing-page-v1 task 09 Playwright suite", () => {
     });
 
     expect(iconPrecedesText).toBe(true);
+  });
+
+  test("animates checkout buttons with the scale pulse keyframe", async ({
+    page,
+  }) => {
+    await page.goto("/");
+
+    const checkoutButtons = getCheckoutButtons(page);
+    await expect(checkoutButtons.first()).toBeVisible();
+
+    const animationNames = await checkoutButtons.evaluateAll((buttons) =>
+      buttons.map((button) => getComputedStyle(button).animationName),
+    );
+
+    expect(animationNames.length).toBeGreaterThan(0);
+    expect(animationNames.every((name) => name === "scale-pulse")).toBe(true);
+    expect(animationNames).not.toContain("pulse-glow");
+  });
+
+  test("disables checkout button animation when reduced motion is requested", async ({
+    page,
+  }) => {
+    await page.emulateMedia({ reducedMotion: "reduce" });
+    await page.goto("/");
+
+    const checkoutButtons = getCheckoutButtons(page);
+    await expect(checkoutButtons.first()).toBeVisible();
+
+    const animationNames = await checkoutButtons.evaluateAll((buttons) =>
+      buttons.map((button) => getComputedStyle(button).animationName),
+    );
+
+    expect(animationNames.length).toBeGreaterThan(0);
+    expect(animationNames.every((name) => name === "none")).toBe(true);
   });
 
   for (const viewport of responsiveViewports) {

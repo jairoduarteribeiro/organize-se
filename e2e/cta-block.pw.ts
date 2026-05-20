@@ -88,7 +88,7 @@ const ctaBlockBrowserFixture = `
       </div>
     </div>
     <p>28 de junho, 10h, horário de Brasília</p>
-    <a class="kiwify-button animate-pulse-glow" href="https://pay.kiwify.com.br/3qkvzij" target="_blank" rel="noopener noreferrer">
+    <a class="kiwify-button animate-scale-pulse hover:animate-none" href="https://pay.kiwify.com.br/3qkvzij" target="_blank" rel="noopener noreferrer">
       Quero garantir meu ingresso
     </a>
   </div>

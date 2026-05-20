@@ -6,10 +6,16 @@ import { describe, expect, it } from "vitest";
 const globalsCss = readFileSync(join(process.cwd(), "app/globals.css"), "utf8");
 
 describe("globals.css animation utilities", () => {
-  it("defines the pulse-glow animation and Tailwind utility token", () => {
-    expect(globalsCss).toContain("--animate-pulse-glow:");
-    expect(globalsCss).toContain("@keyframes pulse-glow");
-    expect(globalsCss).toContain("box-shadow");
+  it("defines the scale-pulse animation and Tailwind utility token", () => {
+    expect(globalsCss).toContain(
+      "--animate-scale-pulse: scale-pulse 2s ease-in-out infinite",
+    );
+    expect(globalsCss).toContain("@keyframes scale-pulse");
+    expect(globalsCss).toContain("transform: scale(1)");
+    expect(globalsCss).toContain("transform: scale(1.03)");
+    expect(globalsCss).not.toContain("--animate-pulse-glow:");
+    expect(globalsCss).not.toContain("@keyframes pulse-glow");
+    expect(globalsCss).not.toContain("box-shadow");
   });
 
   it("defines the fade-in keyframe with opacity and vertical entrance", () => {
