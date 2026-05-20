@@ -65,7 +65,7 @@ export function PainQualifier() {
             Se você leu essa lista e pensou “é exatamente o meu caso”, o
             ORGANIZE-$E é o seu próximo passo para salvar o seu ano.
           </p>
-          <div className="mt-6 w-full max-w-2xl">
+          <div className="mx-auto mt-6 flex w-full max-w-2xl flex-col items-center text-center">
             <CTABlock />
           </div>
         </div>

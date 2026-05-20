@@ -12,6 +12,8 @@ type AxeViolation = {
   }>;
 };
 
+type PainQualifierCenteredElement = "countdown" | "cta";
+
 declare global {
   interface Window {
     __TEST_NOW__?: number;
@@ -19,8 +21,14 @@ declare global {
 }
 
 const responsiveViewports = [
+  { label: "small mobile", width: 320, height: 568 },
   { label: "iPhone 14", width: 375, height: 812 },
   { label: "tablet", width: 768, height: 1024 },
+  { label: "desktop", width: 1280, height: 800 },
+] as const;
+
+const painQualifierCenteringViewports = [
+  { label: "mobile", width: 375, height: 812 },
   { label: "desktop", width: 1280, height: 800 },
 ] as const;
 
@@ -69,6 +77,48 @@ async function hasHorizontalOverflow(page: Page) {
   return page.evaluate(
     () => document.documentElement.scrollWidth > document.documentElement.clientWidth,
   );
+}
+
+function getPainQualifier(page: Page) {
+  return page.locator('section[aria-labelledby="pain-qualifier-title"]');
+}
+
+function getPainQualifierCountdown(page: Page) {
+  return getPainQualifier(page).getByLabel("Contagem regressiva para o workshop");
+}
+
+function getPainQualifierCta(page: Page) {
+  return getPainQualifier(page).getByRole("link", {
+    name: /quero garantir meu ingresso/i,
+  });
+}
+
+function getPainQualifierCtaWrapper(page: Page) {
+  return getPainQualifierCountdown(page).locator("xpath=../..");
+}
+
+async function expectElementToBeCenteredAtViewportMidpoint(
+  page: Page,
+  selectorName: PainQualifierCenteredElement,
+) {
+  const target =
+    selectorName === "countdown"
+      ? getPainQualifierCountdown(page)
+      : getPainQualifierCta(page);
+  const box = await target.boundingBox();
+
+  expect(box, `${selectorName} bounding box should be available`).not.toBeNull();
+
+  const viewport = page.viewportSize();
+  expect(viewport, "viewport size should be available").not.toBeNull();
+
+  const elementCenterX = box!.x + box!.width / 2;
+  const viewportCenterX = viewport!.width / 2;
+
+  expect(
+    Math.abs(elementCenterX - viewportCenterX),
+    `${selectorName} should be centered within 5px of the viewport midpoint`,
+  ).toBeLessThanOrEqual(5);
 }
 
 function summarizeAxeViolations(violations: AxeViolation[]) {
@@ -147,6 +197,40 @@ test.describe("landing-page-v1 task 09 Playwright suite", () => {
     expect(fontChecks.inter).toBe(true);
     expect(fontChecks.h1FontFamily).toContain("Bebas Neue");
   });
+
+  test("centers the CTABlock container inside PainQualifier", async ({ page }) => {
+    await page.goto("/");
+
+    const ctaWrapperStyles = await getPainQualifierCtaWrapper(page).evaluate(
+      (element) => {
+        const styles = getComputedStyle(element);
+
+        return {
+          alignItems: styles.alignItems,
+          display: styles.display,
+          flexDirection: styles.flexDirection,
+          textAlign: styles.textAlign,
+        };
+      },
+    );
+
+    expect(ctaWrapperStyles.display).toBe("flex");
+    expect(ctaWrapperStyles.flexDirection).toBe("column");
+    expect(ctaWrapperStyles.alignItems).toBe("center");
+    expect(ctaWrapperStyles.textAlign).toBe("center");
+  });
+
+  for (const viewport of painQualifierCenteringViewports) {
+    test(`centers the PainQualifier countdown and CTA at ${viewport.label} ${viewport.width}px`, async ({
+      page,
+    }) => {
+      await page.setViewportSize(viewport);
+      await page.goto("/");
+
+      await expectElementToBeCenteredAtViewportMidpoint(page, "countdown");
+      await expectElementToBeCenteredAtViewportMidpoint(page, "cta");
+    });
+  }
 
   for (const viewport of responsiveViewports) {
     test(`has no horizontal scrollbar at ${viewport.label} ${viewport.width}x${viewport.height}`, async ({
