@@ -2,7 +2,7 @@ const faqItems = [
   {
     question: "🧭 O que é o evento e o que vou aprender?",
     answer:
-      "O Workshop Organize-$e é um evento online e prático. Você vai sair da desorganização com um plano real para fazer seu dinheiro sobrar e organizar suas finanças.",
+      "O Workshop ORGANIZE-$E é um evento online e prático. Você vai sair da desorganização com um plano real para fazer seu dinheiro sobrar e organizar suas finanças.",
   },
   {
     question: "🎥 O evento terá gravação?",
@@ -36,7 +36,10 @@ export function FaqAccordion() {
         <p className="text-sm font-black uppercase tracking-[0.18em] text-emerald-700">
           Perguntas frequentes
         </p>
-        <h2 id="faq-title" className="mt-3 text-3xl font-black leading-tight sm:text-5xl">
+        <h2
+          id="faq-title"
+          className="mt-3 font-display text-3xl font-black leading-tight sm:text-5xl"
+        >
           Suas dúvidas podem ser respondidas aqui.
         </h2>
 

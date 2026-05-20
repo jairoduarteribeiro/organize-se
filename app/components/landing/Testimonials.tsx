@@ -55,7 +55,7 @@ export function Testimonials() {
           </p>
           <h2
             id="testimonials-title"
-            className="mt-3 text-3xl font-black leading-tight sm:text-5xl"
+            className="mt-3 font-display text-3xl font-black leading-tight sm:text-5xl"
           >
             O que estão dizendo sobre transformar a relação com o dinheiro.
           </h2>

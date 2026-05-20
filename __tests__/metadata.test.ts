@@ -1,10 +1,15 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
+
+vi.mock("next/font/google", () => ({
+  Bebas_Neue: () => ({ variable: "mock-font-display" }),
+  Inter: () => ({ variable: "mock-font-body" }),
+}));
 
 import { metadata } from "@/app/layout";
 
 describe("root metadata", () => {
   it("exports a non-empty workshop title", () => {
-    expect(metadata.title).toBe("Workshop Organize-$e");
+    expect(metadata.title).toBe("Workshop ORGANIZE-$E");
   });
 
   it("exports a concise Portuguese description", () => {

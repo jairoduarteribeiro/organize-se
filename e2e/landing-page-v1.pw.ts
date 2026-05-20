@@ -107,6 +107,47 @@ test.describe("landing-page-v1 task 09 Playwright suite", () => {
     expect(runtimeErrors).toEqual([]);
   });
 
+  test("renders the brand with the required uppercase casing", async ({ page }) => {
+    await page.goto("/");
+
+    const brandMatches = await page.evaluate(() => {
+      const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+      const matches: string[] = [];
+      let node = walker.nextNode();
+
+      while (node) {
+        const text = node.textContent ?? "";
+        const brandOccurrences = text.match(/organize-\$e/gi) ?? [];
+
+        matches.push(...brandOccurrences);
+        node = walker.nextNode();
+      }
+
+      return matches;
+    });
+
+    expect(brandMatches.length).toBeGreaterThan(0);
+    expect(brandMatches.every((match) => match === "ORGANIZE-$E")).toBe(true);
+  });
+
+  test("loads display and body fonts and applies Bebas Neue to the first h1", async ({
+    page,
+  }) => {
+    await page.goto("/");
+
+    await page.evaluate(() => document.fonts.ready);
+
+    const fontChecks = await page.evaluate(() => ({
+      bebasNeue: document.fonts.check("1em Bebas Neue"),
+      inter: document.fonts.check("1em Inter"),
+      h1FontFamily: getComputedStyle(document.querySelector("h1")!).fontFamily,
+    }));
+
+    expect(fontChecks.bebasNeue).toBe(true);
+    expect(fontChecks.inter).toBe(true);
+    expect(fontChecks.h1FontFamily).toContain("Bebas Neue");
+  });
+
   for (const viewport of responsiveViewports) {
     test(`has no horizontal scrollbar at ${viewport.label} ${viewport.width}x${viewport.height}`, async ({
       page,

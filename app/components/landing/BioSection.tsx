@@ -41,7 +41,10 @@ export function BioSection() {
             <p className="text-sm font-black uppercase tracking-[0.18em] text-emerald-700">
               Quem vai te guiar nesta jornada
             </p>
-            <h2 id="bio-title" className="mt-3 text-3xl font-black leading-tight sm:text-5xl">
+            <h2
+              id="bio-title"
+              className="mt-3 font-display text-3xl font-black leading-tight sm:text-5xl"
+            >
               Rafaela Ribeiro
             </h2>
             <p className="mt-3 text-lg font-bold text-zinc-800">

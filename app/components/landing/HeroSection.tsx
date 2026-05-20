@@ -62,9 +62,9 @@ export function HeroSection() {
             </p>
             <h1
               id="hero-title"
-              className="mt-4 text-4xl font-black leading-tight text-white sm:text-6xl"
+              className="mt-4 font-display text-4xl font-black leading-tight text-white sm:text-6xl"
             >
-              Organize-$e: transforme sua relação com o dinheiro em 30 dias.
+              ORGANIZE-$E: transforme sua relação com o dinheiro em 30 dias.
             </h1>
             <p className="mx-auto mt-5 max-w-2xl text-lg font-semibold leading-8 text-zinc-200">
               Um encontro prático para mulheres que querem sair do caos

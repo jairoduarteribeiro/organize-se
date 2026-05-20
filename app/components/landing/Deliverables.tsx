@@ -56,7 +56,7 @@ export function Deliverables() {
             </p>
             <h2
               id="deliverables-title"
-              className="mt-3 text-3xl font-black leading-tight sm:text-5xl"
+              className="mt-3 font-display text-3xl font-black leading-tight sm:text-5xl"
             >
               Um encontro prático para organizar os próximos 30 dias.
             </h2>

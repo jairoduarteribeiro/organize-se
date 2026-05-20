@@ -38,7 +38,7 @@ export function PainQualifier() {
           </p>
           <h2
             id="pain-qualifier-title"
-            className="mt-3 text-3xl font-black leading-tight sm:text-5xl"
+            className="mt-3 font-display text-3xl font-black leading-tight sm:text-5xl"
           >
             Para você que está cansada de ver o dinheiro escorrendo pelos dedos.
           </h2>
@@ -63,7 +63,7 @@ export function PainQualifier() {
         <div className="rounded-lg bg-zinc-950 p-6 text-white sm:p-8">
           <p className="text-xl font-bold leading-8">
             Se você leu essa lista e pensou “é exatamente o meu caso”, o
-            Organize-$e é o seu próximo passo para salvar o seu ano.
+            ORGANIZE-$E é o seu próximo passo para salvar o seu ano.
           </p>
           <div className="mt-6 w-full max-w-2xl">
             <CTABlock />

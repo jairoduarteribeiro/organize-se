@@ -45,7 +45,8 @@ describe("globals.css animation utilities", () => {
     expect(globalsCss).toContain('@import "tailwindcss";');
     expect(globalsCss).toContain("--color-background: var(--background)");
     expect(globalsCss).toContain("--color-foreground: var(--foreground)");
-    expect(globalsCss).toContain("--font-sans: Arial, Helvetica, sans-serif");
+    expect(globalsCss).toContain("--font-sans: var(--font-body), Arial, Helvetica, sans-serif");
+    expect(globalsCss).toContain("--font-display: var(--font-display), Arial, Helvetica, sans-serif");
     expect(globalsCss).toContain('--font-mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace');
     expect(globalsCss).toContain("@media (prefers-color-scheme: dark)");
     expect(globalsCss).toContain("--background: #0a0a0a");

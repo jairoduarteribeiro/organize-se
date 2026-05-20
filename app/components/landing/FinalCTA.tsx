@@ -12,11 +12,14 @@ export function FinalCTA() {
           <p className="text-sm font-black uppercase tracking-[0.18em] text-emerald-300">
             Última chamada
           </p>
-          <h2 id="final-cta-title" className="mt-3 text-3xl font-black leading-tight sm:text-5xl">
+          <h2
+            id="final-cta-title"
+            className="mt-3 font-display text-3xl font-black leading-tight sm:text-5xl"
+          >
             Entre agora e comece a salvar o seu ano financeiro.
           </h2>
           <p className="mx-auto mt-5 max-w-2xl text-lg leading-8 text-zinc-200">
-            Garanta sua vaga no Workshop Organize-$e e tenha um caminho claro
+            Garanta sua vaga no Workshop ORGANIZE-$E e tenha um caminho claro
             para sair da desorganização com suporte, método e segurança.
           </p>
         </div>

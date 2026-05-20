@@ -12,7 +12,10 @@ export function PriceBlock() {
           <p className="text-sm font-black uppercase tracking-[0.18em] text-yellow-300">
             Inscrição para o workshop
           </p>
-          <h2 id="price-title" className="mt-3 text-3xl font-black leading-tight sm:text-5xl">
+          <h2
+            id="price-title"
+            className="mt-3 font-display text-3xl font-black leading-tight sm:text-5xl"
+          >
             Comece por um valor menor que uma ida ao restaurante.
           </h2>
           <p className="mt-5 text-lg leading-8 text-zinc-200">
@@ -25,7 +28,7 @@ export function PriceBlock() {
           <p className="text-base font-bold uppercase tracking-[0.16em] text-zinc-300">
             Investimento único
           </p>
-          <p className="mt-3 text-6xl font-black leading-none text-yellow-300 sm:text-7xl">
+          <p className="mt-3 font-display text-6xl font-black leading-none text-yellow-300 sm:text-7xl">
             R$ 47
           </p>
           <p className="mt-3 text-base font-semibold leading-7 text-zinc-200">
