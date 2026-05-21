@@ -1,5 +1,5 @@
 import { act } from "react";
-import { afterEach, describe, expect, it, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { cleanup, render, screen, within } from "@testing-library/react";
 import type { ImgHTMLAttributes } from "react";
 import { createElement } from "react";
@@ -69,10 +69,37 @@ class MockIntersectionObserver implements IntersectionObserver {
   }
 }
 
+class MockResizeObserver implements ResizeObserver {
+  disconnect = vi.fn();
+  observe = vi.fn();
+  unobserve = vi.fn();
+}
+
 describe("static landing Server Components", () => {
+  beforeEach(() => {
+    globalThis.IntersectionObserver = MockIntersectionObserver;
+    globalThis.ResizeObserver = MockResizeObserver;
+    window.IntersectionObserver = MockIntersectionObserver;
+    window.ResizeObserver = MockResizeObserver;
+    window.matchMedia = vi.fn().mockImplementation((query: string) => ({
+      addEventListener: vi.fn(),
+      addListener: vi.fn(),
+      dispatchEvent: vi.fn(),
+      matches: false,
+      media: query,
+      onchange: null,
+      removeEventListener: vi.fn(),
+      removeListener: vi.fn(),
+    }));
+  });
+
   afterEach(() => {
     cleanup();
+    Reflect.deleteProperty(globalThis, "IntersectionObserver");
+    Reflect.deleteProperty(globalThis, "ResizeObserver");
     Reflect.deleteProperty(window, "IntersectionObserver");
+    Reflect.deleteProperty(window, "ResizeObserver");
+    Reflect.deleteProperty(window, "matchMedia");
     MockIntersectionObserver.instances = [];
   });
 

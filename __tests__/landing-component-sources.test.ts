@@ -17,15 +17,19 @@ const componentFiles = [
 
 const scrollAnimationClientComponents = [
   "PainQualifier.tsx",
-  "Testimonials.tsx",
   "BioSection.tsx",
   "Deliverables.tsx",
+];
+
+const interactiveClientComponents = [
+  ...scrollAnimationClientComponents,
+  "Testimonials.tsx",
 ];
 
 describe("static landing component source constraints", () => {
   it('keeps non-interactive landing Server Components free of "use client" directives', () => {
     for (const file of componentFiles.filter(
-      (file) => !scrollAnimationClientComponents.includes(file),
+      (file) => !interactiveClientComponents.includes(file),
     )) {
       const source = readFileSync(
         join(process.cwd(), "app/components/landing", file),
@@ -37,16 +41,38 @@ describe("static landing component source constraints", () => {
     }
   });
 
-  it('marks scroll-animation sections with "use client"', () => {
-    for (const file of scrollAnimationClientComponents) {
+  it('marks interactive sections with "use client"', () => {
+    for (const file of interactiveClientComponents) {
       const source = readFileSync(
         join(process.cwd(), "app/components/landing", file),
         "utf8",
       );
 
       expect(source.startsWith('"use client";')).toBe(true);
+    }
+  });
+
+  it("keeps scroll-animation sections wired to useInView", () => {
+    for (const file of scrollAnimationClientComponents) {
+      const source = readFileSync(
+        join(process.cwd(), "app/components/landing", file),
+        "utf8",
+      );
+
       expect(source).toContain("useInView");
     }
+  });
+
+  it("keeps Testimonials wired to Embla carousel", () => {
+    const source = readFileSync(
+      join(process.cwd(), "app/components/landing/Testimonials.tsx"),
+      "utf8",
+    );
+
+    expect(source).toContain('useEmblaCarousel({ loop: true })');
+    expect(source).toContain("emblaApi.scrollNext();");
+    expect(source).toContain("10_000");
+    expect(source).not.toContain("useInView");
   });
 
   it("keeps section components clipped against horizontal overflow", () => {
