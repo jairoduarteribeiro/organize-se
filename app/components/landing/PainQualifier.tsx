@@ -44,7 +44,7 @@ export function PainQualifier() {
           </h2>
           <p className="mt-5 text-lg leading-8 text-zinc-700">
             Se você não aprendeu sobre dinheiro na escola e hoje se sente incapaz
-            de cuidar das suas contas por não ter um método claro, este lugar é
+            de cuidar das suas finanças por não ter um método claro, este lugar é
             seu.
           </p>
         </div>
