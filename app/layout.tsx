@@ -45,7 +45,7 @@ export default function RootLayout({
 }>) {
   return (
     <html
-      lang="pt-BR"
+      lang="pt-PT"
       className={`${displayFont.variable} ${bodyFont.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">{children}</body>

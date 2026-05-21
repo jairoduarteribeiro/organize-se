@@ -33,6 +33,7 @@ This version has breaking changes — APIs, conventions, and file structure may 
 - **REQUIRED ACTION**: If you need to revert or discard changes, **YOU MUST ASK THE USER FIRST**
 - If the worktree contains unexpected edits, read them and work around them; do not revert them
 - The commit message **MUST ONLY BE RELATED TO THE CHANGES**, not to the prompt
+- **NEVER** commit prompt.md
 - **ALWAYS** include a body in commit message to summarize the changes. Use the template below **IMPORTANT**:
 
 ```txt
