@@ -1,17 +1,10 @@
 "use client";
 
-import { createLucideIcon } from "lucide-react";
 import Image from "next/image";
 import { useRef } from "react";
 
 import { useInView } from "@/app/hooks/useInView";
 import { INSTAGRAM_URL } from "@/app/lib/constants";
-
-const Instagram = createLucideIcon("Instagram", [
-  ["rect", { width: "20", height: "20", x: "2", y: "2", rx: "5", ry: "5" }],
-  ["path", { d: "M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" }],
-  ["line", { x1: "17.5", x2: "17.51", y1: "6.5", y2: "6.5" }],
-]);
 
 export function BioSection() {
   const headingRef = useRef<HTMLDivElement>(null);
@@ -31,7 +24,7 @@ export function BioSection() {
             loading="lazy"
             quality={70}
             sizes="(max-width: 1024px) 100vw, 40vw"
-            src="/images/rafa.png"
+            src="/images/sobre-rafa.jpg"
             width={1254}
           />
         </div>
@@ -72,17 +65,40 @@ export function BioSection() {
               sufoco e darem os primeiros passos rumo à reserva financeira.
             </p>
           </div>
-          <blockquote className="mt-8 border-l-4 border-emerald-500 pl-5 text-xl font-bold leading-8 text-zinc-950">
-            “Eu acredito que toda mulher pode ser dona do seu dinheiro e viver
-            com leveza, propósito e prosperidade.”
-          </blockquote>
           <a
             className="mt-6 inline-flex min-h-12 items-center gap-2 rounded-md border-2 border-zinc-950 px-5 py-3 text-base font-black text-zinc-950 transition-colors hover:bg-zinc-950 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-zinc-950"
             href={INSTAGRAM_URL}
             rel="noopener noreferrer"
             target="_blank"
           >
-            <Instagram size={18} strokeWidth={1.75} aria-hidden="true" />
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="url(#ig-gradient)"
+              strokeWidth={1.75}
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              width={18}
+              height={18}
+              aria-hidden="true"
+            >
+              <defs>
+                <linearGradient
+                  id="ig-gradient"
+                  x1="0%"
+                  y1="100%"
+                  x2="100%"
+                  y2="0%"
+                >
+                  <stop offset="0%" stopColor="#E1306C" />
+                  <stop offset="100%" stopColor="#833AB4" />
+                </linearGradient>
+              </defs>
+              <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+              <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
+            </svg>
             @rafaelaribeirofinancas
           </a>
         </div>
