@@ -28,7 +28,7 @@ describe("landing page composition SSR behavior", () => {
   it("renders the landing sections in ADR-001 order", () => {
     const html = renderToString(<Home />);
     const orderedSignals = [
-      "ORGANIZE-$E: transforme sua relação",
+      "ORGANIZE-$E: Plano Prático",
       "Para quem é este workshop",
       "Depoimentos",
       "O que você vai encontrar",

@@ -4,7 +4,7 @@ import { CTABlock } from "@/app/components/landing/CTABlock";
 
 const heroImages = [
   {
-    src: "/images/hero3.png",
+    src: "/images/new-hero3.png",
     alt: "Workshop Organize-se apresentado em formato vertical para leitura no celular.",
     width: 941,
     height: 1672,
@@ -12,7 +12,7 @@ const heroImages = [
     priority: true,
   },
   {
-    src: "/images/hero2.png",
+    src: "/images/new-hero2.png",
     alt: "Workshop Organize-se com arte vertical otimizada para tablets.",
     width: 1122,
     height: 1402,
@@ -20,7 +20,7 @@ const heroImages = [
     priority: false,
   },
   {
-    src: "/images/hero1.png",
+    src: "/images/new-hero1.png",
     alt: "Workshop Organize-se com Rafaela Ribeiro e chamada para organizar as finanças.",
     width: 1672,
     height: 941,
@@ -33,7 +33,7 @@ export function HeroSection() {
   return (
     <section
       aria-labelledby="hero-title"
-      className="flex w-full flex-col overflow-x-clip bg-zinc-950 text-white md:flex-col-reverse"
+      className="flex w-full flex-col-reverse overflow-x-clip bg-zinc-950 text-white"
     >
       <div className="mx-auto flex w-full max-w-4xl flex-col gap-8 px-5 py-10 text-center sm:px-8 sm:py-12">
         <div>
@@ -44,7 +44,7 @@ export function HeroSection() {
             id="hero-title"
             className="mt-4 font-display text-4xl font-black leading-tight text-white sm:text-6xl"
           >
-            ORGANIZE-$E: transforme sua relação com o dinheiro em 30 dias.
+            ORGANIZE-$E: Plano Prático para Organizar seu dinheiro e fazer ele sobrar em 30 dias.
           </h1>
           <p className="mx-auto mt-5 max-w-2xl text-lg font-semibold leading-8 text-zinc-200">
             Um encontro prático para mulheres que querem sair do caos financeiro,

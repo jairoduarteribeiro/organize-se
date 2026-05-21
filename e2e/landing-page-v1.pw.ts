@@ -393,7 +393,7 @@ test.describe("landing-page-v1 task 09 Playwright suite", () => {
     expect(animationNames.every((name) => name === "none")).toBe(true);
   });
 
-  test("renders the hero title above the image on mobile", async ({ page }) => {
+  test("renders the hero image above the title on mobile", async ({ page }) => {
     await page.setViewportSize({ width: 375, height: 812 });
     await page.goto("/");
 
@@ -408,7 +408,7 @@ test.describe("landing-page-v1 task 09 Playwright suite", () => {
 
     expect(titleBox, "hero title bounding box should be available").not.toBeNull();
     expect(imageBox, "hero mobile image bounding box should be available").not.toBeNull();
-    expect(titleBox!.y).toBeLessThan(imageBox!.y);
+    expect(imageBox!.y).toBeLessThan(titleBox!.y);
   });
 
   test("keeps the hero image above the title at tablet and larger viewports", async ({
