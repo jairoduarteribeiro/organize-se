@@ -24,7 +24,7 @@ export function PriceBlock() {
           </p>
         </div>
 
-        <div className="rounded-lg border border-white/15 bg-white/10 p-5 shadow-2xl shadow-black/30 sm:p-7">
+        <div className="rounded-lg border border-white/15 bg-white/10 p-5 text-center shadow-2xl shadow-black/30 sm:p-7">
           <p className="text-base font-bold uppercase tracking-[0.16em] text-zinc-300">
             Investimento único
           </p>
