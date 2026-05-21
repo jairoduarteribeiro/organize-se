@@ -30,7 +30,7 @@ export function CTABlock() {
   ] as const;
 
   return (
-    <div className="w-full overflow-x-clip">
+    <div className="w-full px-1">
       <div
         aria-label="Contagem regressiva para o workshop"
         className="grid grid-cols-4 gap-2 text-center sm:gap-3"
