@@ -52,18 +52,10 @@ export function BioSection() {
             </p>
           </div>
           <div className="mt-6 space-y-5 text-lg leading-8 text-zinc-700">
-            <p>
-              Nordestina de Fortaleza e morando em Portugal há mais de 4 anos,
-              Rafaela tem 32 anos e uma missão clara: transformar a vida
-              financeira de mulheres pelo mundo.
-            </p>
-            <p>
-              Formada em Administração e especialista em Finanças Pessoais,
-              ajuda mulheres a conquistarem independência, segurança e liberdade
-              através da organização. Com sua metodologia prática e acolhedora,
-              já ajudou dezenas de mulheres no Brasil e na Europa a saírem do
-              sufoco e darem os primeiros passos rumo à reserva financeira.
-            </p>
+            <p>Tenho 32 anos, sou nordestina, de Fortaleza – Ceará, e hoje moro em Portugal há 4 anos, ao lado do meu marido.</p>
+            <p>Sou formada em Administração, Educadora Financeira e Mentora de mulheres pelo mundo.</p>
+            <p>A educação financeira transformou a minha vida, e hoje ensino mulheres a conquistarem uma vida melhor através dela.</p>
+            <p>Já ajudei dezenas de mulheres a organizarem suas finanças, saírem do sufoco e realizarem seus sonhos com mais liberdade e segurança.</p>
           </div>
           <a
             className="mt-6 inline-flex min-h-12 items-center gap-2 rounded-md border-2 border-zinc-950 px-5 py-3 text-base font-black text-zinc-950 transition-colors hover:bg-zinc-950 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-zinc-950"
