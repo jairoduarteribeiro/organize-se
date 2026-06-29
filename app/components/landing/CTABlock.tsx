@@ -1,6 +1,5 @@
 "use client";
 
-import { WaitlistForm } from "@/app/components/landing/WaitlistForm";
 import { useCountdown } from "@/app/hooks/useCountdown";
 import { EVENT_UTC, KIWIFY_URL } from "@/app/lib/constants";
 
@@ -19,7 +18,24 @@ export function CTABlock() {
   const countdown = useCountdown(EVENT_UTC);
 
   if (countdown.isExpired) {
-    return <WaitlistForm />;
+    return (
+      <div className="w-full px-1">
+        <p className="text-center text-sm font-semibold text-zinc-200">
+          O workshop ao vivo já aconteceu. A gravação está disponível por tempo
+          limitado. Garanta seu acesso agora.
+        </p>
+
+        <a
+          className="animate-scale-pulse mt-5 inline-flex min-h-12 w-full items-center justify-center rounded-md bg-yellow-300 px-6 py-3 text-center text-base font-black uppercase text-zinc-950 shadow-lg shadow-yellow-300/20 transition-all duration-150 hover:animate-none hover:scale-[1.02] hover:bg-yellow-200 hover:shadow-xl hover:shadow-yellow-300/30 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-yellow-200"
+          href={KIWIFY_URL}
+          rel="noopener noreferrer"
+          style={{ minHeight: "48px" }}
+          target="_blank"
+        >
+          Quero acessar a gravação
+        </a>
+      </div>
+    );
   }
 
   const countdownItems = [

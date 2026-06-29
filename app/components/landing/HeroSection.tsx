@@ -38,7 +38,7 @@ export function HeroSection() {
       <div className="mx-auto flex w-full max-w-4xl flex-col gap-8 px-5 py-10 text-center sm:px-8 sm:py-12">
         <div>
           <p className="text-sm font-black uppercase tracking-[0.18em] text-emerald-300">
-            Workshop online e ao vivo
+            Workshop online e prático
           </p>
           <h1
             id="hero-title"

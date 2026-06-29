@@ -10,7 +10,7 @@ export function PriceBlock() {
       <div className="mx-auto grid w-full max-w-5xl gap-8 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
         <div>
           <p className="text-sm font-black uppercase tracking-[0.18em] text-yellow-300">
-            Inscrição para o workshop
+            Workshop ORGANIZE-$E
           </p>
           <h2
             id="price-title"
@@ -19,7 +19,7 @@ export function PriceBlock() {
             Comece por um valor menor que uma ida ao restaurante.
           </h2>
           <p className="mt-5 text-lg leading-8 text-zinc-200">
-            Você terá 3 horas de orientação ao vivo, planilha exclusiva,
+            Você terá 3 horas de conteúdo prático, planilha exclusiva,
             gravação por 6 meses e um plano claro para os próximos 30 dias.
           </p>
         </div>

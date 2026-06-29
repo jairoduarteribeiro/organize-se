@@ -552,26 +552,48 @@ test.describe("landing-page-v1 task 09 Playwright suite", () => {
     expect(imageAltTexts.every((alt) => alt.length > 0)).toBe(true);
   });
 
-  test("switches to waitlist mode after the event timestamp", async ({ page }) => {
+  test("switches to recording checkout CTA after the event timestamp", async ({
+    page,
+  }) => {
     await openPageThenAdvanceToPostEvent(page);
 
     await expect(
       page.getByRole("link", { name: /quero garantir meu ingresso/i }),
     ).toHaveCount(0);
     await expect(
+      page.getByRole("link", { name: /quero acessar a gravação/i }).first(),
+    ).toBeVisible();
+    await expect(
+      page.getByRole("link", { name: /quero acessar a gravação/i }).first(),
+    ).toHaveAttribute("href", KIWIFY_URL);
+    await expect(
+      page.getByRole("link", { name: /quero acessar a gravação/i }).first(),
+    ).toHaveAttribute("target", "_blank");
+    await expect(
+      page.getByRole("link", { name: /quero acessar a gravação/i }).first(),
+    ).toHaveAttribute("rel", "noopener noreferrer");
+  });
+
+  test("does not expose waitlist form after the event timestamp", async ({
+    page,
+  }) => {
+    await openPageThenAdvanceToPostEvent(page);
+
+    await expect(
       page.getByRole("textbox", { name: /email para lista de espera/i }).first(),
+    ).toBeHidden();
+    await expect(
+      page.getByRole("button", { name: /entrar na lista/i }).first(),
+    ).toBeHidden();
+    await expect(
+      page.getByText(/o workshop ao vivo já aconteceu/i).first(),
     ).toBeVisible();
   });
 
-  test("submits the post-event waitlist form successfully", async ({ page }) => {
+  test("post-event hero eyebrow avoids live-seat wording", async ({ page }) => {
     await openPageThenAdvanceToPostEvent(page);
 
-    await page
-      .getByRole("textbox", { name: /email para lista de espera/i })
-      .first()
-      .fill("teste@email.com");
-    await page.getByRole("button", { name: /entrar na lista/i }).first().click();
-
-    await expect(page.getByText(/você entrou na lista de espera/i).first()).toBeVisible();
+    const heroSection = page.locator('section[aria-labelledby="hero-title"]');
+    await expect(heroSection.getByText("Workshop online e prático")).toBeVisible();
   });
 });

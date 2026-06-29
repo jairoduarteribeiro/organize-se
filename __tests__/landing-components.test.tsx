@@ -95,6 +95,7 @@ describe("static landing Server Components", () => {
 
   afterEach(() => {
     cleanup();
+    vi.restoreAllMocks();
     Reflect.deleteProperty(globalThis, "IntersectionObserver");
     Reflect.deleteProperty(globalThis, "ResizeObserver");
     Reflect.deleteProperty(window, "IntersectionObserver");
@@ -145,10 +146,11 @@ describe("static landing Server Components", () => {
     expect(screen.getByText("GARANTIA")).toBeTruthy();
   });
 
-  it("FaqAccordion renders exactly 5 details elements", () => {
+  it("FaqAccordion renders exactly 5 details elements with recording availability mention", () => {
     const { container } = render(<FaqAccordion />);
 
     expect(container.querySelectorAll("details")).toHaveLength(5);
+    expect(screen.getAllByText(/gravação está disponível/i)).toHaveLength(2);
   });
 
   it("Deliverables renders exactly 4 checklist items", () => {
@@ -203,6 +205,9 @@ describe("static landing Server Components", () => {
   });
 
   it("HeroSection renders an image with non-empty alt text and a Kiwify CTA", () => {
+    vi.spyOn(Date, "now").mockReturnValue(
+      new Date("2026-06-27T13:00:00.000Z").getTime(),
+    );
     render(<HeroSection />);
 
     const heroImages = screen.getAllByRole("img");
@@ -214,6 +219,7 @@ describe("static landing Server Components", () => {
     expect(heroImages[0].getAttribute("alt")?.trim()).toBeTruthy();
     expect(heroCta.getAttribute("href")).toContain("kiwify.com.br");
     expect(heroCta.getAttribute("href")).toBe(KIWIFY_URL);
+    expect(screen.getByText("Workshop online e prático")).toBeTruthy();
   });
 
   it("HeroSection marks the first rendered hero image as priority", () => {
@@ -224,13 +230,15 @@ describe("static landing Server Components", () => {
     expect(heroImages[0].getAttribute("data-priority")).toBe("true");
   });
 
-  it('PriceBlock renders the "R$ 47" price', () => {
+  it('PriceBlock renders the "R$ 47" price and mentions acesso ao conteúdo prático e gravação', () => {
     render(<PriceBlock />);
 
     expect(screen.getByText("R$ 47")).toBeTruthy();
+    expect(screen.getByText(/conteúdo prático/i)).toBeTruthy();
+    expect(screen.getByText(/gravação por 6 meses/i)).toBeTruthy();
   });
 
-  it("FinalCTA renders the shared guarantee seal", () => {
+  it("FinalCTA renders the shared guarantee seal without live-seat wording", () => {
     render(<FinalCTA />);
 
     expect(
@@ -239,6 +247,8 @@ describe("static landing Server Components", () => {
       ),
     ).toBeTruthy();
     expect(screen.getByText("7 DIAS")).toBeTruthy();
+    expect(screen.getByText(/Garanta seu acesso ao Workshop/i)).toBeTruthy();
+    expect(screen.queryByText(/vaga/i)).toBeNull();
   });
 
   it("renders every component without empty image alt attributes", () => {

@@ -2,7 +2,7 @@ const faqItems = [
   {
     question: "🧭 O que é o evento e o que vou aprender?",
     answer:
-      "O Workshop ORGANIZE-$E é um evento online e prático. Você vai sair da desorganização com um plano real para fazer seu dinheiro sobrar e organizar suas finanças.",
+      "O Workshop ORGANIZE-$E é um workshop online e prático. Você vai sair da desorganização com um plano real para fazer seu dinheiro sobrar e organizar suas finanças.",
   },
   {
     question: "🎥 O evento terá gravação?",
@@ -12,12 +12,12 @@ const faqItems = [
   {
     question: "⏰ E se eu não puder participar ao vivo?",
     answer:
-      "Não tem problema! A gravação ficará disponível na área de membros para você não perder nenhum detalhe do conteúdo.",
+      "Não tem problema! A gravação está disponível na área de membros para você não perder nenhum detalhe do conteúdo.",
   },
   {
-    question: "📅 Quando será o evento?",
+    question: "📅 Quando foi o workshop?",
     answer:
-      "Acontecerá no dia 28 de Junho, das 10h às 13h (horário de Brasília), de forma 100% online. Serão 3 horas de conteúdo intensivo focado em resultados.",
+      "Aconteceu no dia 28 de Junho, das 10h às 13h (horário de Brasília), de forma 100% online. Foram 3 horas de conteúdo intensivo focado em resultados. A gravação está disponível na área de membros.",
   },
   {
     question: "💸 Tem garantia?",
